@@ -1,0 +1,14 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Code postal</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+            placeholder="Ex. pat@example.com">
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
+            Veuillez entrez un code postal valide
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Veuillez entrez un code postal
+        </mat-error>
+    </mat-form-field>
+</form>
