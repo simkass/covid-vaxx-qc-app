@@ -1,14 +1,22 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <mat-label>Code postal</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com">
-        <mat-hint></mat-hint>
-        <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
-            Veuillez entrez un code postal valide
-        </mat-error>
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-            Veuillez entrez un code postal
-        </mat-error>
-    </mat-form-field>
-</form>
+<div class=postal_code>
+    <div class=form>
+        <h1 style='margin-bottom: 30px;'>Créer une alerte</h1>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Code postal</mat-label>
+                <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                    placeholder="Ex. A1A 1A1">
+                <mat-hint></mat-hint>
+                <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
+                    Veuillez entrez un code postal valide
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Veuillez entrez un code postal
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <div style="width: 100%; text-align: right; margin-top: 10px;">
+            <button mat-flat-button color="primary">Débuter</button>
+        </div>
+    </div>
+</div>
