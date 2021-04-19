@@ -1,0 +1,37 @@
+.banner {
+    width: 100%;
+    color: white;
+    background-color: #3f51b5;
+}
+
+.banner_shadow {
+    height: 10px;
+    width: 100%;
+    background-image: linear-gradient(180deg, #2d3a83, #3f51b5);
+}
+
+.title{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.steps {
+    width: 80%;
+    flex-wrap: wrap;
+    display: inline-flex;
+    justify-content: space-evenly;
+}
+
+.steps div {
+    width: 300px;
+    margin-top: 35px;
+    text-align: center;
+}
+
+mat-icon {
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+}

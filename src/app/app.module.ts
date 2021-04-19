@@ -15,13 +15,15 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { PostalCodeInputComponent } from './postal-code-input/postal-code-input.component';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    PostalCodeInputComponent
+    PostalCodeInputComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,
