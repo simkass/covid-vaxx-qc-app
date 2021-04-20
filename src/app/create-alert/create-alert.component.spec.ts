@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostalCodeInputComponent } from './postal-code-input.component';
+import { CreateAlertComponent } from './create-alert.component';
 
-describe('PostalCodeInputComponent', () => {
-  let component: PostalCodeInputComponent;
-  let fixture: ComponentFixture<PostalCodeInputComponent>;
+describe('CreateAlertComponent', () => {
+  let component: CreateAlertComponent;
+  let fixture: ComponentFixture<CreateAlertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostalCodeInputComponent ]
+      declarations: [ CreateAlertComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostalCodeInputComponent);
+    fixture = TestBed.createComponent(CreateAlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

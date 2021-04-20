@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -11,11 +11,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-postal-code-input',
-  templateUrl: './postal-code-input.component.html',
-  styleUrls: ['./postal-code-input.component.scss']
+  selector: 'app-create-alert',
+  templateUrl: './create-alert.component.html',
+  styleUrls: ['./create-alert.component.scss']
 })
-export class PostalCodeInputComponent {
+export class CreateAlertComponent {
 
   emailFormControl = new FormControl('', [
     Validators.required,
