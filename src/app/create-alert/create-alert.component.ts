@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { CreateAlertStepsComponent } from '../create-alert-steps/create-alert-steps.component';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -17,10 +18,31 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CreateAlertComponent {
 
+  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+
+  postal_code
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+
   emailFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy] ?[0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy][0-9]'),
+    Validators.pattern('[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz] ?[0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz][0-9]'),
   ]);
 
   matcher = new MyErrorStateMatcher();
+
+  start_creation(): void {
+
+    // Clear creation form
+    this.container.clear();
+
+    // create the component factory
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CreateAlertStepsComponent);
+
+    // add the component to the view
+    const componentRef = this.container.createComponent(componentFactory);
+
+    // pass some data to the component
+    componentRef.instance.postal_code = this.postal_code
+  }
 }

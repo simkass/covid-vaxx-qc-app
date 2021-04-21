@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -11,7 +12,11 @@ export class CreateAlertStepsComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  @Input() postal_code: string;
+
+  hello;
+
+  constructor(private _formBuilder: FormBuilder, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -20,5 +25,8 @@ export class CreateAlertStepsComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+    this.dataService.getEstablishments(this.postal_code).subscribe((data: any[]) => {
+      this.hello = data;
+    })
   }
 }

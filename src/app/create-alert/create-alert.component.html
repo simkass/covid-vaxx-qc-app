@@ -5,7 +5,7 @@
             <mat-form-field class="example-full-width">
                 <mat-label>Code postal</mat-label>
                 <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                    placeholder="Ex. A1A 1A1">
+                    placeholder="Ex. A1A 1A1" [(ngModel)]='postal_code'>
                 <mat-hint></mat-hint>
                 <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
                     Veuillez entrez un code postal valide
@@ -16,8 +16,8 @@
             </mat-form-field>
         </form>
         <div style="width: 100%; text-align: right; margin-top: 10px;">
-            <button mat-flat-button color="primary">Débuter</button>
+            <button mat-flat-button color="primary" (click)="start_creation()" [disabled]="emailFormControl.hasError('pattern') || emailFormControl.hasError('required')">Débuter</button>
         </div>
     </div>
 </div>
-<app-create-alert-steps></app-create-alert-steps>
+<div #container></div>
