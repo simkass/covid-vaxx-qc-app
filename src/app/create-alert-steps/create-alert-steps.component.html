@@ -1,3 +1,4 @@
+<div class=create-alert-stepper>
 <mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" #stepper>
 
     <mat-step [stepControl]="firstFormGroup">
@@ -15,17 +16,20 @@
 
     <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
         <form [formGroup]="secondFormGroup">
-            <app-availabilities-picker></app-availabilities-picker>
+
+            <div class=second-buttons>
+                <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
+                <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+            </div>
+
             <div><div #availabilitiesContainer></div></div>
+
             <div class=add-button id=add-button>
                 <button mat-fab color="accent" (click)="addAvailabilitiesPicker()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
+            
         </form>
     </mat-step>
 
@@ -52,3 +56,4 @@
     </mat-step>
 
 </mat-horizontal-stepper>
+</div>

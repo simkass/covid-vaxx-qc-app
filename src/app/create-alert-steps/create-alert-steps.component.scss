@@ -1,3 +1,7 @@
+.create-alert-stepper{
+    min-height: 90vh;
+}
+
 mat-horizontal-stepper {
     width: 80%;
     margin: 0 auto;
@@ -24,8 +28,21 @@ mat-horizontal-stepper {
     overflow-x: hidden;
 }
 
+.second-buttons {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.second-buttons button {
+    margin-left: 20px;
+}
+
 .add-button{
     width: 100%;
+    margin-top: 20px;
     display: inline-flex;
     justify-content: flex-end;
 }

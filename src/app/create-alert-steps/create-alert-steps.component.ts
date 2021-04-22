@@ -71,6 +71,7 @@ export class CreateAlertStepsComponent implements OnInit {
       }
       this._vps.scrollToAnchor('create-alert-stepper')
     })
+    this.addAvailabilitiesPicker();
     this.cd.detectChanges();
   }
 
@@ -102,7 +103,7 @@ export class CreateAlertStepsComponent implements OnInit {
   }
 
   removeDatepicker(key: number) {
-    if (this.availabilitiesContainer.length < 1) return;
+    if (this.availabilitiesContainer.length < 2) return;
 
     let componentRef = this.datepickerRefs.filter(
       x => x.instance.id == key
