@@ -9,8 +9,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatRippleModule } from '@angular/material/core';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatInputModule } from '@angular/material/input';
@@ -19,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { BannerComponent } from './banner/banner.component';
 import { CreateAlertComponent } from './create-alert/create-alert.component';
 import { CreateAlertStepsComponent } from './create-alert-steps/create-alert-steps.component';
+import { EstablishmentCardComponent } from './establishment-card/establishment-card.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { CreateAlertStepsComponent } from './create-alert-steps/create-alert-ste
     HomeComponent,
     BannerComponent,
     CreateAlertComponent,
-    CreateAlertStepsComponent
+    CreateAlertStepsComponent,
+    EstablishmentCardComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +40,10 @@ import { CreateAlertStepsComponent } from './create-alert-steps/create-alert-ste
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatRippleModule,
     MatIconModule,
     MatButtonModule,
+    MatCardModule,
     MatInputModule,
     MatStepperModule,
     FormsModule,

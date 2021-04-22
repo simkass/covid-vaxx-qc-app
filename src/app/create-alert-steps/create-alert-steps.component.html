@@ -9,6 +9,8 @@
             <div>
                 <button mat-button matStepperNext>Next</button>
             </div>
+            <button mat-flat-button color="primary" (click)="selectAll()">Sélectionner tout</button>
+            <div #container></div>
         </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
@@ -44,4 +46,3 @@
         </div>
     </mat-step>
 </mat-horizontal-stepper>
-<a>{{hello | json}}</a>
