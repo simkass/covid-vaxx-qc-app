@@ -1,16 +1,14 @@
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-horizontal-stepper [linear]="isLinear" id="create_alert_stepper" #stepper>
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Choisir vos centres de vaccination</ng-template>
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperNext>Next</button>
+            <div style="width: 95%; display: inline-flex; justify-content: flex-end; margin-top: 10px; margin-bottom: 20px;">
+                <button mat-flat-button color="primary" (click)="selectAll()">{{ select_all_label }}</button>
+                <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
             </div>
-            <button mat-flat-button color="primary" (click)="selectAll()">Sélectionner tout</button>
-            <div #container></div>
+            <div style="width: 100%; height: 800px; overflow: scroll; overflow-x: hidden; justify-content: center;">
+                <div #container></div>
+            </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
@@ -38,7 +36,7 @@
         </form>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
+        <ng-template matStepLabel>Terminé</ng-template>
         <p>You are now done.</p>
         <div>
             <button mat-button matStepperPrevious>Back</button>

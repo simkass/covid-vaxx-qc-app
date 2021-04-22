@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewCont
 import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
+import { ViewportScroller } from '@angular/common'
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -17,15 +18,18 @@ export class CreateAlertStepsComponent implements OnInit {
 
   cards = [];
 
+  select_all = false;
+  select_all_label = "Sélectionner tout"
+
   @Input() postal_code: string;
 
   private establishment_response;
 
-  constructor(private _formBuilder: FormBuilder, private dataService: DataService, private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef) { }
+  constructor(private _formBuilder: FormBuilder, private dataService: DataService, private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstCtrl: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
@@ -38,7 +42,7 @@ export class CreateAlertStepsComponent implements OnInit {
 
     this.dataService.getEstablishments(this.postal_code).subscribe((data: any[]) => {
       this.establishment_response = data;
-      for (let i = 0; i <  this.establishment_response.places.length; i++) {
+      for (let i = 0; i < this.establishment_response.places.length; i++) {
         // add the component to the view
         const componentRef = this.container.createComponent(componentFactory);
         this.cards.push(componentRef)
@@ -47,14 +51,24 @@ export class CreateAlertStepsComponent implements OnInit {
         componentRef.instance.address = this.establishment_response.places[i].formatted_address;
         componentRef.instance.id = this.establishment_response.places[i].id;
       }
+      this._vps.scrollToAnchor('create_alert_stepper')
     })
 
     this.cd.detectChanges();
   }
 
-  selectAll(){
-    for (let i = 0; i < this.cards.length; i++){
-      this.cards[i].instance.selected = true;
+  selectAll() {
+    this.select_all = !this.select_all;
+
+    if (this.select_all) {
+      this.select_all_label = "Désélectionner tout"
+    }
+    else {
+      this.select_all_label = "Sélectionner tout"
+    }
+
+    for (let i = 0; i < this.cards.length; i++) {
+      this.cards[i].instance.selected = this.select_all;
     }
   }
 }
