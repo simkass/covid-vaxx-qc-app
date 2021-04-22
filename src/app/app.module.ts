@@ -11,9 +11,11 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatRippleModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -25,6 +27,7 @@ import { CreateAlertStepsComponent } from './create-alert-steps/create-alert-ste
 import { EstablishmentCardComponent } from './establishment-card/establishment-card.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AvailabilitiesPickerComponent } from './availabilities-picker/availabilities-picker.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BannerComponent,
     CreateAlertComponent,
     CreateAlertStepsComponent,
-    EstablishmentCardComponent
+    EstablishmentCardComponent,
+    AvailabilitiesPickerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +50,11 @@ import { NavbarComponent } from './navbar/navbar.component';
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
+    MatDatepickerModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatRippleModule,
     MatSidenavModule,
     MatStepperModule,
