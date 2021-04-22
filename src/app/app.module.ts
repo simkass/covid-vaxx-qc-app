@@ -1,27 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatRippleModule } from '@angular/material/core';
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { NavbarComponent } from './navbar/navbar.component';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
+import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { BannerComponent } from './banner/banner.component';
 import { CreateAlertComponent } from './create-alert/create-alert.component';
 import { CreateAlertStepsComponent } from './create-alert-steps/create-alert-steps.component';
 import { EstablishmentCardComponent } from './establishment-card/establishment-card.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -35,21 +38,21 @@ import { EstablishmentCardComponent } from './establishment-card/establishment-c
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatRippleModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    HttpClientModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatRippleModule,
+    MatSidenavModule,
+    MatStepperModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

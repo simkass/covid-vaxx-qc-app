@@ -7,12 +7,20 @@
 
 mat-card {
     width: 95%;
-    background-color: #ececec;
 }
 
 mat-card:hover {
     @include mat-elevation(8);
     cursor: pointer;
+}
+
+mat-card-title {
+    font-size: max(min(2vw, 25px), 16px);
+    line-height: max(min(2.1vw, 30px), 20px);
+}
+
+mat-card-subtitle {
+    margin-bottom: 0px;
 }
 
 .not-selected {
@@ -24,15 +32,6 @@ mat-card:hover {
     background-color: #3f51b5;
 }
 
-.selected mat-card-subtitle{
+.selected mat-card-subtitle {
     color: white;
-}
-
-mat-card-title{
-    font-size: max(min(2vw, 25px), 16px);
-    line-height: max(min(2.1vw, 30px), 20px);
-}
-
-mat-card-subtitle{
-    margin-bottom: 0px;
 }

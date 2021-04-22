@@ -1,5 +1,5 @@
 <div class=card>
-    <mat-card (click)="onCardClick($event)" matRipple [ngClass]="selected ? 'selected' : 'not-selected' ">
+    <mat-card [ngClass]="selected ? 'selected' : 'not-selected'" (click)="onCardClick($event)" matRipple>
         <div>
             <mat-card-title>{{ this.name }}</mat-card-title>
             <mat-card-subtitle>{{ this.address }}</mat-card-subtitle>

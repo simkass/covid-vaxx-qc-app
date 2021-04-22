@@ -8,21 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EstablishmentCardComponent implements OnInit {
 
   @Input()
+  id: string;
+  @Input()
   name: string;
   @Input()
   address: string;
-  @Input()
-  id: string;
 
-  selected = false;
+  public selected: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public onCardClick(evt: MouseEvent){
-    console.log(evt);
+  public onCardClick(evt: MouseEvent) {
     this.selected = !this.selected;
   }
 }
