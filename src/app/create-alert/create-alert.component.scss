@@ -1,31 +1,35 @@
-.example-form {
+h1 {
+    margin-bottom: 30px;
+}
+
+form {
     width: 100%;
 }
 
-.example-full-width {
+mat-form-field {
     width: 100%;
 }
 
-.postal_code {
+.create-alert {
     width: 100%;
     display: inline-flex;
     justify-content: center;
 }
 
-.form {
+.form-container {
     width: 30%;
-    align-items: right;
     margin-top: 50px;
+    align-items: right;
 }
 
 @media all and (max-width: 1200px) {
-    .form {
+    .form-container {
         width: 50%;
     }
 }
 
 @media all and (max-width: 800px) {
-    .form {
+    .form-container {
         width: 80%;
     }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
-import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../data.service';
 import { ViewportScroller } from '@angular/common'
+
+import { DataService } from '../data.service';
+import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -10,29 +11,36 @@ import { ViewportScroller } from '@angular/common'
   styleUrls: ['./create-alert-steps.component.scss']
 })
 export class CreateAlertStepsComponent implements OnInit {
+
   @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
-  isLinear = true;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  @Input() postalCode: string;
 
-  cards = [];
-
-  select_all = false;
-  select_all_label = "Sélectionner tout"
-
-  @Input() postal_code: string;
+  public isLinear: boolean = true;
+  public firstFormGroup: FormGroup;
+  public secondFormGroup: FormGroup;
+  public thirdFormGroup: FormGroup;
 
   private establishment_response;
 
-  constructor(private _formBuilder: FormBuilder, private dataService: DataService, private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
+  private cards = [];
+  public allSelected: boolean = false;
+  public selectAllLabel: string = "Sélectionner tout"
+
+
+
+  constructor(private _formBuilder: FormBuilder, private dataService: DataService,
+    private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['']
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['', Validators.required]
     });
   }
 
@@ -40,35 +48,40 @@ export class CreateAlertStepsComponent implements OnInit {
     // create the component factory
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
 
-    this.dataService.getEstablishments(this.postal_code).subscribe((data: any[]) => {
+    this.dataService.getEstablishments(this.postalCode).subscribe((data: any[]) => {
+      // Store response
       this.establishment_response = data;
+
+      // Create and display cards for every establishment
       for (let i = 0; i < this.establishment_response.places.length; i++) {
         // add the component to the view
         const componentRef = this.container.createComponent(componentFactory);
-        this.cards.push(componentRef)
-        // pass some data to the component
+
+        // Set component parameters
+        componentRef.instance.id = this.establishment_response.places[i].id;
         componentRef.instance.name = this.establishment_response.places[i].name_fr;
         componentRef.instance.address = this.establishment_response.places[i].formatted_address;
-        componentRef.instance.id = this.establishment_response.places[i].id;
-      }
-      this._vps.scrollToAnchor('create_alert_stepper')
-    })
 
+        // Store reference to component
+        this.cards.push(componentRef)
+      }
+      this._vps.scrollToAnchor('create-alert-stepper')
+    })
     this.cd.detectChanges();
   }
 
   selectAll() {
-    this.select_all = !this.select_all;
+    this.allSelected = !this.allSelected;
 
-    if (this.select_all) {
-      this.select_all_label = "Désélectionner tout"
+    if (this.allSelected) {
+      this.selectAllLabel = "Désélectionner tout"
     }
     else {
-      this.select_all_label = "Sélectionner tout"
+      this.selectAllLabel = "Sélectionner tout"
     }
 
     for (let i = 0; i < this.cards.length; i++) {
-      this.cards[i].instance.selected = this.select_all;
+      this.cards[i].instance.selected = this.allSelected;
     }
   }
 }

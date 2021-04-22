@@ -1,17 +1,25 @@
-mat-horizontal-stepper{
+mat-horizontal-stepper {
     width: 80%;
     margin: 0 auto;
 }
 
-.mat-stepper-horizontal {
-    margin-top: 20px;
+.first-buttons {
+    width: 95%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: inline-flex;
+    justify-content: flex-end;
 }
 
-.mat-form-field {
-    margin-top: 20px;
-}
-
-button{
+.first-buttons button {
     margin-left: 40px;
     margin-right: -20px;
+}
+
+.cards-container {
+    height: 800px;
+    width: 100%;
+    justify-content: center;
+    overflow: scroll;
+    overflow-x: hidden;
 }

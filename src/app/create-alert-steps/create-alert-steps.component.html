@@ -1,16 +1,18 @@
-<mat-horizontal-stepper [linear]="isLinear" id="create_alert_stepper" #stepper>
+<mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" #stepper>
+
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Choisir vos centres de vaccination</ng-template>
-            <div style="width: 95%; display: inline-flex; justify-content: flex-end; margin-top: 10px; margin-bottom: 20px;">
-                <button mat-flat-button color="primary" (click)="selectAll()">{{ select_all_label }}</button>
+            <div class=first-buttons>
+                <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
                 <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
             </div>
-            <div style="width: 100%; height: 800px; overflow: scroll; overflow-x: hidden; justify-content: center;">
+            <div class=cards-container>
                 <div #container></div>
             </div>
         </form>
     </mat-step>
+    
     <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
         <form [formGroup]="secondFormGroup">
             <mat-form-field>
@@ -23,11 +25,12 @@
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fournir votre adresse courriel">
-        <form [formGroup]="secondFormGroup">
+    
+    <mat-step [stepControl]="thirdFormGroup" label="Fournir votre adresse courriel">
+        <form [formGroup]="thirdFormGroup">
             <mat-form-field>
                 <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
@@ -35,6 +38,7 @@
             </div>
         </form>
     </mat-step>
+    
     <mat-step>
         <ng-template matStepLabel>Terminé</ng-template>
         <p>You are now done.</p>
@@ -43,4 +47,5 @@
             <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
     </mat-step>
+
 </mat-horizontal-stepper>
