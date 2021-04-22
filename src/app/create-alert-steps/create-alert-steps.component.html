@@ -12,18 +12,23 @@
             </div>
         </form>
     </mat-step>
-    
+
     <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
         <form [formGroup]="secondFormGroup">
             <app-availabilities-picker></app-availabilities-picker>
-            
+            <div><div #availabilitiesContainer></div></div>
+            <div class=add-button id=add-button>
+                <button mat-fab color="accent" (click)="addAvailabilitiesPicker()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
-    
+
     <mat-step [stepControl]="thirdFormGroup" label="Fournir votre adresse courriel">
         <form [formGroup]="thirdFormGroup">
             <mat-form-field>
@@ -36,7 +41,7 @@
             </div>
         </form>
     </mat-step>
-    
+
     <mat-step>
         <ng-template matStepLabel>Terminé</ng-template>
         <p>You are now done.</p>

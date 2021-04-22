@@ -4,6 +4,7 @@ import { ViewportScroller } from '@angular/common'
 
 import { DataService } from '../data.service';
 import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
+import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabilities-picker.component'
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -13,6 +14,7 @@ import { EstablishmentCardComponent } from '../establishment-card/establishment-
 export class CreateAlertStepsComponent implements OnInit {
 
   @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('availabilitiesContainer', { read: ViewContainerRef }) availabilitiesContainer: ViewContainerRef;
 
   @Input() postalCode: string;
 
@@ -21,13 +23,15 @@ export class CreateAlertStepsComponent implements OnInit {
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
 
-  private establishment_response;
+  private establishmentResponse;
 
-  private cards = [];
+  private establishmentRefs = [];
+  private datepickerRefs = [];
+
   public allSelected: boolean = false;
   public selectAllLabel: string = "Sélectionner tout"
 
-
+  datePickerId: number = 0;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
@@ -50,20 +54,20 @@ export class CreateAlertStepsComponent implements OnInit {
 
     this.dataService.getEstablishments(this.postalCode).subscribe((data: any[]) => {
       // Store response
-      this.establishment_response = data;
+      this.establishmentResponse = data;
 
       // Create and display cards for every establishment
-      for (let i = 0; i < this.establishment_response.places.length; i++) {
+      for (let i = 0; i < this.establishmentResponse.places.length; i++) {
         // add the component to the view
         const componentRef = this.container.createComponent(componentFactory);
 
         // Set component parameters
-        componentRef.instance.id = this.establishment_response.places[i].id;
-        componentRef.instance.name = this.establishment_response.places[i].name_fr;
-        componentRef.instance.address = this.establishment_response.places[i].formatted_address;
+        componentRef.instance.id = this.establishmentResponse.places[i].id;
+        componentRef.instance.name = this.establishmentResponse.places[i].name_fr;
+        componentRef.instance.address = this.establishmentResponse.places[i].formatted_address;
 
         // Store reference to component
-        this.cards.push(componentRef)
+        this.establishmentRefs.push(componentRef)
       }
       this._vps.scrollToAnchor('create-alert-stepper')
     })
@@ -80,8 +84,35 @@ export class CreateAlertStepsComponent implements OnInit {
       this.selectAllLabel = "Sélectionner tout"
     }
 
-    for (let i = 0; i < this.cards.length; i++) {
-      this.cards[i].instance.selected = this.allSelected;
+    for (let i = 0; i < this.establishmentRefs.length; i++) {
+      this.establishmentRefs[i].instance.selected = this.allSelected;
     }
+  }
+
+  addAvailabilitiesPicker() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AvailabilitiesPickerComponent);
+    const componentRef = this.availabilitiesContainer.createComponent(componentFactory);
+
+    let datePickerComponent = componentRef.instance;
+    datePickerComponent.id = ++this.datePickerId;
+    datePickerComponent.parentRef = this;
+
+    this.datepickerRefs.push(componentRef)
+    this._vps.scrollToAnchor('add-button')
+  }
+
+  removeDatepicker(key: number) {
+    if (this.availabilitiesContainer.length < 1) return;
+
+    let componentRef = this.datepickerRefs.filter(
+      x => x.instance.id == key
+    )[0];
+
+    componentRef.destroy();
+
+    // removing component from the list
+    this.datepickerRefs = this.datepickerRefs.filter(
+      x => x.instance.id !== key
+    );
   }
 }

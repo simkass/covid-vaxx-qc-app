@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CreateAlertStepsComponent } from '../create-alert-steps/create-alert-steps.component'
 
 @Component({
   selector: 'app-availabilities-picker',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvailabilitiesPickerComponent implements OnInit {
 
+  @Input()
+  public id: number;
+  @Input()
+  public parentRef: CreateAlertStepsComponent;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  remove() {
+    this.parentRef.removeDatepicker(this.id)
+  }
 }
