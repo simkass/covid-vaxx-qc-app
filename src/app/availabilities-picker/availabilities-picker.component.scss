@@ -17,7 +17,14 @@
 }
 
 .date-input{
-    min-width: 220px;
+    min-width: 200px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.date-input div{
+    min-width: 70px;
+    margin-left: 40px;
 }
 
 .buttons {
@@ -27,4 +34,15 @@
 
 mat-form-field {
     width: 200px;
+}
+
+.input-label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@media all and (max-width: 720px) {
+    .date-input div{
+        margin-left: 10px;
+    }
 }
