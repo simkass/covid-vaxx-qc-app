@@ -1,60 +1,78 @@
 <div class=create-alert-stepper>
-<mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" #stepper>
+    <mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" #stepper>
 
-    <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Choisir vos centres de vaccination</ng-template>
-            <div class=first-buttons>
-                <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
-                <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
-            </div>
-            <div class=cards-container>
-                <div #container></div>
-            </div>
-        </form>
-    </mat-step>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Choisir vos centres de vaccination</ng-template>
+                <div class=first-buttons>
+                    <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
+                    <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                </div>
+                <div class=cards-container>
+                    <div #container></div>
+                </div>
+            </form>
+        </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
-        <form [formGroup]="secondFormGroup">
+        <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
+            <form [formGroup]="secondFormGroup">
 
-            <div class=second-buttons>
-                <mat-checkbox class="always-free" (click)="setAlwaysFree()">Je suis disponible n'importe quand</mat-checkbox>
-                <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
-                <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
-            </div>
+                <div class=second-buttons>
+                    <mat-checkbox class="always-free" (click)="setAlwaysFree()">Je suis disponible n'importe quand
+                    </mat-checkbox>
+                    <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
+                    <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                </div>
 
-            <div [hidden]="alwaysFree"><div #availabilitiesContainer></div></div>
+                <div [hidden]="alwaysFree">
+                    <div #availabilitiesContainer></div>
+                </div>
 
-            <div class=add-button id=add-button>
-                <button mat-fab color="accent" (click)="addAvailabilitiesPicker()">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-            
-        </form>
-    </mat-step>
+                <div class=add-button id=add-button>
+                    <button mat-fab color="accent" (click)="addAvailabilitiesPicker()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
 
-    <mat-step [stepControl]="thirdFormGroup" label="Fournir votre adresse courriel">
-        <form [formGroup]="thirdFormGroup">
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="thirdFormGroup" label="Fournir votre adresse courriel">
+            <form [formGroup]="thirdFormGroup">
+                <div style='width: 100%; display: inline-flex; justify-content: center;'>
+                    <div>
+                        <mat-form-field class="email-field">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput [formControl]="emailFormControl"
+                                placeholder="Ex. pat@example.com">
+                            <mat-error
+                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Veuillez fournir une adresse courriel valide
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Une adresse courriel est <strong>requise</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div style='width: 100%; display: inline-flex; justify-content: center;'>
+                    <div class=third-buttons>
+                        <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
+                        <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Terminé</ng-template>
+            <p>You are now done.</p>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
             </div>
-        </form>
-    </mat-step>
+        </mat-step>
 
-    <mat-step>
-        <ng-template matStepLabel>Terminé</ng-template>
-        <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
-    </mat-step>
-
-</mat-horizontal-stepper>
+    </mat-horizontal-stepper>
 </div>

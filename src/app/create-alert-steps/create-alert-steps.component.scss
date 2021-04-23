@@ -1,4 +1,4 @@
-.create-alert-stepper{
+.create-alert-stepper {
     min-height: 90vh;
 }
 
@@ -45,10 +45,26 @@ mat-horizontal-stepper {
     font-size: 16px;
 }
 
-.add-button{
+.add-button {
     width: 100%;
     margin-top: 20px;
     display: inline-flex;
     justify-content: flex-end;
 }
 
+.email-field {
+    width: 400px;
+}
+
+.third-buttons{
+    width: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.third-buttons button {
+    margin-left: 40px;
+}

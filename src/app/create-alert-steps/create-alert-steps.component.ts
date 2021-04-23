@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ViewportScroller } from '@angular/common'
 
 import { DataService } from '../data.service';
@@ -15,6 +15,11 @@ export class CreateAlertStepsComponent implements OnInit {
 
   @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
   @ViewChild('availabilitiesContainer', { read: ViewContainerRef }) availabilitiesContainer: ViewContainerRef;
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   @Input() postalCode: string;
 
@@ -45,7 +50,7 @@ export class CreateAlertStepsComponent implements OnInit {
       secondCtrl: ['']
     });
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+      thirdCtrl: ['', Validators.required, Validators.email]
     });
   }
 
