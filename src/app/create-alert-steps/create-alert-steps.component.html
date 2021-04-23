@@ -18,11 +18,12 @@
         <form [formGroup]="secondFormGroup">
 
             <div class=second-buttons>
+                <mat-checkbox class="always-free" (click)="setAlwaysFree()">Je suis disponible n'importe quand</mat-checkbox>
                 <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
                 <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
             </div>
 
-            <div><div #availabilitiesContainer></div></div>
+            <div [hidden]="alwaysFree"><div #availabilitiesContainer></div></div>
 
             <div class=add-button id=add-button>
                 <button mat-fab color="accent" (click)="addAvailabilitiesPicker()">

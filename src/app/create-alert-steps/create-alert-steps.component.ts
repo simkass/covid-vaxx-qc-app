@@ -30,8 +30,9 @@ export class CreateAlertStepsComponent implements OnInit {
 
   public allSelected: boolean = false;
   public selectAllLabel: string = "Sélectionner tout"
+  public alwaysFree: boolean = false;
 
-  datePickerId: number = 0;
+  public datePickerId: number = 0;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
@@ -115,5 +116,9 @@ export class CreateAlertStepsComponent implements OnInit {
     this.datepickerRefs = this.datepickerRefs.filter(
       x => x.instance.id !== key
     );
+  }
+
+  setAlwaysFree() {
+    this.alwaysFree = !this.alwaysFree
   }
 }

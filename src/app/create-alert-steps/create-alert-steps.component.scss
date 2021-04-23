@@ -33,11 +33,16 @@ mat-horizontal-stepper {
     margin-top: 10px;
     margin-bottom: 10px;
     display: inline-flex;
+    align-items: center;
     justify-content: flex-end;
 }
 
 .second-buttons button {
-    margin-left: 20px;
+    margin-left: 40px;
+}
+
+.always-free {
+    font-size: 16px;
 }
 
 .add-button{
@@ -46,3 +51,4 @@ mat-horizontal-stepper {
     display: inline-flex;
     justify-content: flex-end;
 }
+
