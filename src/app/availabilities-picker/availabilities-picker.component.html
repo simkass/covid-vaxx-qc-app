@@ -1,25 +1,27 @@
-<mat-card class="card">
-    <div class=date-inputs>
-        <div class=date-input>
-            <div>
-                <a class=input-label>DÉBUT</a>
+<div style='width: 100%;'>
+    <mat-card class="card">
+        <div class=date-inputs>
+            <div class=date-input>
+                <div>
+                    <a class=input-label>DÉBUT</a>
+                </div>
+                <mat-form-field>
+                    <input matInput type="datetime-local">
+                </mat-form-field>
             </div>
-            <mat-form-field>
-                <input matInput type="datetime-local">
-            </mat-form-field>
-        </div>
-        <div class=date-input>
-            <div>
-                <a class=input-label>FIN</a>
+            <div class=date-input>
+                <div>
+                    <a class=input-label>FIN</a>
+                </div>
+                <mat-form-field>
+                    <input matInput type="datetime-local">
+                </mat-form-field>
             </div>
-            <mat-form-field>
-                <input matInput type="datetime-local">
-            </mat-form-field>
         </div>
-    </div>
-    <div class=buttons>
-        <button mat-icon-button color="primary" (click)='remove()'>
-            <mat-icon>delete</mat-icon>
-        </button>
-    </div>
-</mat-card>
+        <div class=buttons>
+            <button mat-icon-button color="primary" (click)='remove()'>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </mat-card>
+</div>

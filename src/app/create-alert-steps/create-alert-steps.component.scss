@@ -7,17 +7,34 @@ mat-horizontal-stepper {
     margin: 0 auto;
 }
 
-.first-buttons {
-    width: 95%;
+.title {
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
     display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-label {
+    height: 35px;
+    min-width: 250px;
+    display: inline-flex;
+}
+
+.title-buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: flex-end;
 }
 
-.first-buttons button {
-    margin-left: 40px;
-    margin-right: -20px;
+.title-buttons button {
+    max-height: 40px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .cards-container {
@@ -26,19 +43,6 @@ mat-horizontal-stepper {
     justify-content: center;
     overflow: scroll;
     overflow-x: hidden;
-}
-
-.second-buttons {
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.second-buttons button {
-    margin-left: 40px;
 }
 
 .always-free {
@@ -54,9 +58,10 @@ mat-horizontal-stepper {
 
 .email-field {
     width: 400px;
+    max-width: 90%;
 }
 
-.third-buttons{
+.third-buttons {
     width: 400px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -67,4 +72,20 @@ mat-horizontal-stepper {
 
 .third-buttons button {
     margin-left: 40px;
+}
+
+@media all and (max-width: 1200px) {
+    mat-horizontal-stepper {
+        width: 95%;
+    }
+}
+
+@media all and (max-width: 900px) {
+    .title-buttons {
+        height: 70px;
+        width: 100%;
+    }
+    .title-label {
+        height: 70px;
+    }
 }

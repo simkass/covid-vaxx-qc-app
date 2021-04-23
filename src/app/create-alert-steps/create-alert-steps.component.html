@@ -3,28 +3,40 @@
 
         <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Choisir vos centres de vaccination</ng-template>
-                <div class=first-buttons>
-                    <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
-                    <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                <ng-template matStepLabel>Établissements</ng-template>
+
+                <div class=title>
+                    <div class=title-label>
+                        <h1>Choisir vos centres de vaccination</h1>
+                    </div>
+                    <div class=title-buttons>
+                        <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
+                        <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                    </div>
                 </div>
+
                 <div class=cards-container>
                     <div #container></div>
                 </div>
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="secondFormGroup" label="Fournir vos disponibilités">
+        <mat-step [stepControl]="secondFormGroup" label="Disponibilités">
             <form [formGroup]="secondFormGroup">
 
-                <div class=second-buttons>
+                <div class=title>
+                    <div class=title-label>
+                        <h1>Fournir vos disponibilités</h1>
+                    </div>
                     <mat-checkbox class="always-free" (click)="setAlwaysFree()">Je suis disponible n'importe quand
                     </mat-checkbox>
-                    <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
-                    <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                    <div class=title-buttons>
+                        <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
+                        <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                    </div>
                 </div>
 
-                <div [hidden]="alwaysFree">
+                <div [hidden]="alwaysFree" style='width: 100%;'>
                     <div #availabilitiesContainer></div>
                 </div>
 
@@ -37,11 +49,14 @@
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="thirdFormGroup" label="Fournir votre adresse courriel">
+        <mat-step [stepControl]="thirdFormGroup" label="Email">
             <form [formGroup]="thirdFormGroup">
+                <div style='width: 100%; text-align: center;'>
+                    <h1>Fournir votre adresse courriel</h1>
+                </div>
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
-                    <div>
-                        <mat-form-field class="email-field">
+                    <div class="email-field">
+                        <mat-form-field style='width: 100%;'>
                             <mat-label>Email</mat-label>
                             <input type="email" matInput [formControl]="emailFormControl"
                                 placeholder="Ex. pat@example.com">
@@ -55,6 +70,7 @@
                         </mat-form-field>
                     </div>
                 </div>
+                
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class=third-buttons>
                         <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
