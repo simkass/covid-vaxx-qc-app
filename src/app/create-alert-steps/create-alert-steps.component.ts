@@ -118,15 +118,17 @@ export class CreateAlertStepsComponent implements OnInit {
   }
 
   addAvailabilitiesPicker() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AvailabilitiesPickerComponent);
-    const componentRef = this.availabilitiesContainer.createComponent(componentFactory);
-
-    let datePickerComponent = componentRef.instance;
-    datePickerComponent.id = ++this.datePickerId;
-    datePickerComponent.parentRef = this;
-
-    this.datepickerRefs.push(componentRef)
-    this._vps.scrollToAnchor('add-button')
+    if (!this.alwaysFree){
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AvailabilitiesPickerComponent);
+      const componentRef = this.availabilitiesContainer.createComponent(componentFactory);
+  
+      let datePickerComponent = componentRef.instance;
+      datePickerComponent.id = ++this.datePickerId;
+      datePickerComponent.parentRef = this;
+  
+      this.datepickerRefs.push(componentRef)
+      this._vps.scrollToAnchor('add-button')
+    }
   }
 
   removeDatepicker(key: number) {
