@@ -11,7 +11,7 @@
                     </div>
                     <div class=title-buttons>
                         <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
-                        <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                        <button mat-flat-button color="primary" [disabled]="establishmentRefs.length == 0" matStepperNext>Prochaine étape</button>
                     </div>
                 </div>
 

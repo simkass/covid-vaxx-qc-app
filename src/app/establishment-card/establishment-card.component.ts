@@ -13,6 +13,8 @@ export class EstablishmentCardComponent implements OnInit {
   name: string;
   @Input()
   address: string;
+  @Input()
+  selectable: boolean;
 
   public selected: boolean = false;
 
@@ -22,6 +24,8 @@ export class EstablishmentCardComponent implements OnInit {
   }
 
   public onCardClick(evt: MouseEvent) {
-    this.selected = !this.selected;
+    if (this.selectable){
+      this.selected = !this.selected;
+    }
   }
 }

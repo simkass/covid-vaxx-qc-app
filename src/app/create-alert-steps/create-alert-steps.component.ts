@@ -30,8 +30,9 @@ export class CreateAlertStepsComponent implements OnInit {
   public thirdFormGroup: FormGroup;
 
   private establishmentResponse;
+  private establishmentError;
 
-  private establishmentRefs = [];
+  public establishmentRefs = [];
   private selectedEstablishments = [];
   private datepickerRefs = [];
   private availabilities = [];
@@ -62,11 +63,13 @@ export class CreateAlertStepsComponent implements OnInit {
   ngAfterViewInit() {
     // create the component factory
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
+    // this.container.clear();
+    // this.establishmentRefs = [];
 
     this.dataService.getEstablishments(this.postalCode).subscribe((data: any[]) => {
       // Store response
       this.establishmentResponse = data;
-
+      
       // Create and display cards for every establishment
       for (let i = 0; i < this.establishmentResponse.places.length; i++) {
         // add the component to the view
@@ -76,12 +79,25 @@ export class CreateAlertStepsComponent implements OnInit {
         componentRef.instance.id = this.establishmentResponse.places[i].id;
         componentRef.instance.name = this.establishmentResponse.places[i].name_fr;
         componentRef.instance.address = this.establishmentResponse.places[i].formatted_address;
+        componentRef.instance.selectable = true;
 
         // Store reference to component
         this.establishmentRefs.push(componentRef)
       }
       this._vps.scrollToAnchor('create-alert-stepper')
+
+    }, (err: any) => { 
+      if (this.establishmentRefs.length == 0){
+        const componentRef = this.container.createComponent(componentFactory);
+        componentRef.instance.id = '500';
+        componentRef.instance.name = "Ce code postal n'existe pas ou est invalide";
+        componentRef.instance.address = "Veuillez entrer un code postal valide";
+        componentRef.instance.selectable = false;
+        this.firstFormGroup.controls.firstCtrl.setValidators(Validators.required)
+        this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
+      }
     })
+
     this.addAvailabilitiesPicker();
     this.cd.detectChanges();
   }
