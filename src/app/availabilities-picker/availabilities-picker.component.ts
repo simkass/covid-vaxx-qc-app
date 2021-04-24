@@ -13,6 +13,9 @@ export class AvailabilitiesPickerComponent implements OnInit {
   @Input()
   public parentRef: CreateAlertStepsComponent;
 
+  public startDatetime;
+  public endDatetime;
+
   constructor() { }
 
   ngOnInit(): void {

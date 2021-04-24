@@ -5,6 +5,7 @@ import { ViewportScroller } from '@angular/common'
 import { DataService } from '../data.service';
 import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabilities-picker.component'
+import { User } from '../user.model'
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -31,13 +32,17 @@ export class CreateAlertStepsComponent implements OnInit {
   private establishmentResponse;
 
   private establishmentRefs = [];
+  private selectedEstablishments = [];
   private datepickerRefs = [];
+  private availabilities = [];
 
   public allSelected: boolean = false;
   public selectAllLabel: string = "Sélectionner tout"
   public alwaysFree: boolean = false;
 
   public datePickerId: number = 0;
+
+  public emailAddress: string;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
@@ -125,5 +130,46 @@ export class CreateAlertStepsComponent implements OnInit {
 
   setAlwaysFree() {
     this.alwaysFree = !this.alwaysFree
+  }
+
+  submitForm() {
+    // Identify selected establishments
+    for (let i = 0; i < this.establishmentRefs.length; i++) {
+      if (this.establishmentRefs[i].instance.selected) {
+        this.selectedEstablishments.push(this.establishmentRefs[i].instance.id)
+      }
+    }
+    // If no establishment is selected, select all
+    if (this.selectedEstablishments.length == 0) {
+      for (let i = 0; i < this.establishmentRefs.length; i++) {
+        this.selectedEstablishments.push(this.establishmentRefs[i].instance.id)
+      }
+    }
+
+    // Identify specified availabilities
+    for (let i = 0; i < this.datepickerRefs.length; i++) {
+      if (this.datepickerRefs[i].instance.hasOwnProperty("startDatetime") &&
+        this.datepickerRefs[i].instance.hasOwnProperty("endDatetime")) {
+        this.availabilities.push({
+          "start_datetime": this.datepickerRefs[i].instance.startDatetime,
+          "end_datetime": this.datepickerRefs[i].instance.endDatetime
+        })
+      }
+    }
+
+    // If always free or no availabilities
+    if (this.alwaysFree || this.availabilities.length == 0) {
+      this.availabilities.push({
+        "start_datetime": "2020-01-01T09:00:00",
+        "end_datetime": "2023-12-31T09:00:00"
+      })
+    }
+
+    // Create user and post
+    const user = new User();
+    user.email = this.emailAddress;
+    user.establishments = this.selectedEstablishments;
+    user.availabilities = this.availabilities;
+    this.dataService.postUser(user).subscribe(data => { });
   }
 }

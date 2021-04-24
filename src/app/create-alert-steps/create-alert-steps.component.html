@@ -58,7 +58,7 @@
                     <div class="email-field">
                         <mat-form-field style='width: 100%;'>
                             <mat-label>Email</mat-label>
-                            <input type="email" matInput [formControl]="emailFormControl"
+                            <input type="string" matInput [formControl]="emailFormControl" [(ngModel)]="emailAddress"
                                 placeholder="Ex. pat@example.com">
                             <mat-error
                                 *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -70,25 +70,15 @@
                         </mat-form-field>
                     </div>
                 </div>
-                
+
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class=third-buttons>
                         <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
-                        <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                        <button mat-flat-button color="primary" [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')" (click)="submitForm()">Soumettre</button>
                     </div>
                 </div>
 
             </form>
         </mat-step>
-
-        <mat-step>
-            <ng-template matStepLabel>Terminé</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-            </div>
-        </mat-step>
-
     </mat-horizontal-stepper>
 </div>

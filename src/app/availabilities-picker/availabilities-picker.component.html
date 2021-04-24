@@ -6,7 +6,7 @@
                     <a class=input-label>DÉBUT</a>
                 </div>
                 <mat-form-field>
-                    <input matInput type="datetime-local">
+                    <input matInput type="datetime-local" [(ngModel)]='startDatetime'>
                 </mat-form-field>
             </div>
             <div class=date-input>
@@ -14,7 +14,7 @@
                     <a class=input-label>FIN</a>
                 </div>
                 <mat-form-field>
-                    <input matInput type="datetime-local">
+                    <input matInput type="datetime-local" [(ngModel)]='endDatetime'>
                 </mat-form-field>
             </div>
         </div>
