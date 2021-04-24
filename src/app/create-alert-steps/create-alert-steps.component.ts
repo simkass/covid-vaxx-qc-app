@@ -25,12 +25,12 @@ export class CreateAlertStepsComponent implements OnInit {
   @Input() postalCode: string;
 
   public isLinear: boolean = true;
+  public editable: boolean = true;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
 
   private establishmentResponse;
-  private establishmentError;
 
   public establishmentRefs = [];
   private selectedEstablishments = [];
@@ -56,7 +56,7 @@ export class CreateAlertStepsComponent implements OnInit {
       secondCtrl: ['']
     });
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', Validators.required, Validators.email]
+      thirdCtrl: this.emailFormControl
     });
   }
 
@@ -69,7 +69,7 @@ export class CreateAlertStepsComponent implements OnInit {
     this.dataService.getEstablishments(this.postalCode).subscribe((data: any[]) => {
       // Store response
       this.establishmentResponse = data;
-      
+
       // Create and display cards for every establishment
       for (let i = 0; i < this.establishmentResponse.places.length; i++) {
         // add the component to the view
@@ -86,8 +86,8 @@ export class CreateAlertStepsComponent implements OnInit {
       }
       this._vps.scrollToAnchor('create-alert-stepper')
 
-    }, (err: any) => { 
-      if (this.establishmentRefs.length == 0){
+    }, (err: any) => {
+      if (this.establishmentRefs.length == 0) {
         const componentRef = this.container.createComponent(componentFactory);
         componentRef.instance.id = '500';
         componentRef.instance.name = "Ce code postal n'existe pas ou est invalide";
@@ -118,14 +118,14 @@ export class CreateAlertStepsComponent implements OnInit {
   }
 
   addAvailabilitiesPicker() {
-    if (!this.alwaysFree){
+    if (!this.alwaysFree) {
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AvailabilitiesPickerComponent);
       const componentRef = this.availabilitiesContainer.createComponent(componentFactory);
-  
+
       let datePickerComponent = componentRef.instance;
       datePickerComponent.id = ++this.datePickerId;
       datePickerComponent.parentRef = this;
-  
+
       this.datepickerRefs.push(componentRef)
       this._vps.scrollToAnchor('add-button')
     }
@@ -188,6 +188,11 @@ export class CreateAlertStepsComponent implements OnInit {
     user.email = this.emailAddress;
     user.establishments = this.selectedEstablishments;
     user.availabilities = this.availabilities;
+    this.editable = false;
     this.dataService.postUser(user).subscribe(data => { });
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 }

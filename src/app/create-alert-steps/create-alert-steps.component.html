@@ -1,7 +1,7 @@
 <div class=create-alert-stepper>
     <mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" #stepper>
 
-        <mat-step [stepControl]="firstFormGroup">
+        <mat-step [stepControl]="firstFormGroup" [editable]="editable">
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Établissements</ng-template>
 
@@ -11,7 +11,8 @@
                     </div>
                     <div class=title-buttons>
                         <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
-                        <button mat-flat-button color="primary" [disabled]="establishmentRefs.length == 0" matStepperNext>Prochaine étape</button>
+                        <button mat-flat-button color="primary" [disabled]="establishmentRefs.length == 0"
+                            matStepperNext>Prochaine étape</button>
                     </div>
                 </div>
 
@@ -21,7 +22,7 @@
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="secondFormGroup" label="Disponibilités">
+        <mat-step [stepControl]="secondFormGroup" label="Disponibilités" [editable]="editable">
             <form [formGroup]="secondFormGroup">
 
                 <div class=title>
@@ -49,8 +50,9 @@
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="thirdFormGroup" label="Email">
+        <mat-step [stepControl]="thirdFormGroup" label="Email" [editable]="editable">
             <form [formGroup]="thirdFormGroup">
+
                 <div style='width: 100%; text-align: center;'>
                     <h1>Fournir votre adresse courriel</h1>
                 </div>
@@ -74,11 +76,21 @@
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class=third-buttons>
                         <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
-                        <button mat-flat-button color="primary" [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')" (click)="submitForm()">Soumettre</button>
+                        <button mat-flat-button color="primary"
+                            [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')"
+                            (click)="submitForm()" matStepperNext>Soumettre</button>
                     </div>
                 </div>
 
             </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Terminé</ng-template>
+            <h1>Votre alerte est créée.</h1>
+            <h2>Vous recevrez un courriel à l'adresse {{ emailAddress }} lorsqu'un rendez-vous qui respecte vos critères est disponible.</h2>
+            <div>
+                <button mat-flat-button color="primary" (click)="refresh()">Créer une autre alerte</button>
+            </div>
         </mat-step>
     </mat-horizontal-stepper>
 </div>
