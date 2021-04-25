@@ -29,6 +29,7 @@ import { EstablishmentCardComponent } from './establishment-card/establishment-c
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AvailabilitiesPickerComponent } from './availabilities-picker/availabilities-picker.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AvailabilitiesPickerComponent } from './availabilities-picker/availabil
     CreateAlertComponent,
     CreateAlertStepsComponent,
     EstablishmentCardComponent,
-    AvailabilitiesPickerComponent
+    AvailabilitiesPickerComponent,
+    UnsubscribeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,39 @@
+<div class=unsubscribe>
+    <div class=unsubscribe-form>
+        <form>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                     placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Veuillez fournir une adresse courriel valide
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Une adresse courriel est <strong>requise</strong>
+              </mat-error>
+            </mat-form-field>
+          </form>
+          <div class=buttons>
+            <button mat-flat-button color="primary" [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')" (click)="startUnsubscription()">Se désabonner</button>
+          </div>
+    </div>
+    <div class=confirm-unsubscribe [hidden]="!unsubscriptionStarted">
+        <p>Vous devriez recevoir un code de confirmation par courriel dans les 5 prochaines minutes. Veuillez le fournir dans la boite ci-desous pour compléter le désabonnement.</p>
+        <form>
+            <mat-form-field>
+              <mat-label>Code de confirmation</mat-label>
+              <input type="string" matInput [formControl]="codeFormControl" [errorStateMatcher]="matcher"
+                     placeholder="Ex. 1234">
+              <mat-error *ngIf="codeFormControl.hasError('pattern') && !codeFormControl.hasError('required')">
+                Veuillez fournir un code valide
+              </mat-error>
+              <mat-error *ngIf="codeFormControl.hasError('required')">
+                Un code de confirmation est <strong>requis</strong>
+              </mat-error>
+            </mat-form-field>
+          </form>
+          <div class=buttons>
+            <button mat-flat-button color="primary" (click)="startUnsubscription()">Confirmer</button>
+          </div>
+    </div>
+</div>
