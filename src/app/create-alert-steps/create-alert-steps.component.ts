@@ -84,7 +84,7 @@ export class CreateAlertStepsComponent implements OnInit {
         // Store reference to component
         this.establishmentRefs.push(componentRef)
       }
-      this._vps.scrollToAnchor('create-alert-stepper')
+      
 
     }, (err: any) => {
       if (this.establishmentRefs.length == 0) {
@@ -97,7 +97,8 @@ export class CreateAlertStepsComponent implements OnInit {
         this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
       }
     })
-
+    
+    this._vps.scrollToAnchor('create-alert-stepper')
     this.addAvailabilitiesPicker();
     this.cd.detectChanges();
   }
@@ -127,7 +128,6 @@ export class CreateAlertStepsComponent implements OnInit {
       datePickerComponent.parentRef = this;
 
       this.datepickerRefs.push(componentRef)
-      this._vps.scrollToAnchor('add-button')
     }
   }
 
