@@ -186,6 +186,7 @@ export class CreateAlertStepsComponent implements OnInit {
     // Create user and post
     const user = new User();
     user.email = this.emailAddress;
+    user.postalCode = this.postalCode
     user.establishments = this.selectedEstablishments;
     user.availabilities = this.availabilities;
     this.editable = false;
