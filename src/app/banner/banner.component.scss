@@ -30,10 +30,17 @@
     margin-right: 50px;
     margin-left: 50px;
     text-align: center;
+    text-decoration: none;
+    color: white;
+    
 }
 
 mat-icon {
     font-size: 70px;
     width: 70px;
     height: 70px;
+}
+
+a {
+    text-decoration: none;
 }

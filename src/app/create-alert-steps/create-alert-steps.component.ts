@@ -169,8 +169,8 @@ export class CreateAlertStepsComponent implements OnInit {
       if (this.datepickerRefs[i].instance.hasOwnProperty("startDatetime") &&
         this.datepickerRefs[i].instance.hasOwnProperty("endDatetime")) {
         this.availabilities.push({
-          "start_datetime": this.datepickerRefs[i].instance.startDatetime,
-          "end_datetime": this.datepickerRefs[i].instance.endDatetime
+          "start": this.datepickerRefs[i].instance.startDatetime,
+          "stop": this.datepickerRefs[i].instance.endDatetime
         })
       }
     }
@@ -178,8 +178,8 @@ export class CreateAlertStepsComponent implements OnInit {
     // If always free or no availabilities
     if (this.alwaysFree || this.availabilities.length == 0) {
       this.availabilities.push({
-        "start_datetime": "2020-01-01T09:00",
-        "end_datetime": "2023-12-31T09:00"
+        "start": "2021-01-01T09:00",
+        "stop": "2022-12-31T09:00"
       })
     }
 
