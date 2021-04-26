@@ -178,8 +178,8 @@ export class CreateAlertStepsComponent implements OnInit {
     // If always free or no availabilities
     if (this.alwaysFree || this.availabilities.length == 0) {
       this.availabilities.push({
-        "start_datetime": "2020-01-01T09:00:00",
-        "end_datetime": "2023-12-31T09:00:00"
+        "start_datetime": "2020-01-01T09:00",
+        "end_datetime": "2023-12-31T09:00"
       })
     }
 
