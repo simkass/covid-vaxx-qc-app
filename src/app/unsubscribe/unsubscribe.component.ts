@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { DataService } from '../data.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -17,9 +18,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class UnsubscribeComponent implements OnInit {
 
+  public emailAddress: string;
   public unsubscriptionStarted: boolean = false;
+  public unsubscriptionNotNeeded: boolean = false;
+  public unsubscriptionSuccess: boolean = false;
+  public unsubscriptionFailed: boolean = false;
 
-  constructor() { }
+  public unsubRequest;
+  public unsub;
+  public randomCode: number;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +40,30 @@ export class UnsubscribeComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   startUnsubscription() {
-    this.unsubscriptionStarted = true;
+    this.dataService.unsubscribeRequest(this.emailAddress).subscribe((data: any[]) => {
+      this.unsubRequest = data;
+      if (this.unsubRequest['success']){
+        this.unsubscriptionNotNeeded = false;
+        this.unsubscriptionStarted = true;
+      }
+      else if (!this.unsubRequest['success']){
+        this.unsubscriptionStarted = false;
+        this.unsubscriptionNotNeeded = true;
+      }
+    })
+  }
+
+  completeUnsubscription() {
+    this.dataService.unsubscribe(this.emailAddress, this.randomCode).subscribe((data: any[]) => {
+      this.unsub = data;
+      if (this.unsub['success']){
+        this.unsubscriptionFailed = false;
+        this.unsubscriptionSuccess = true;
+      }
+      else if (!this.unsub['success']){
+        this.unsubscriptionSuccess = false;
+        this.unsubscriptionFailed = true;
+      }
+    })
   }
 }

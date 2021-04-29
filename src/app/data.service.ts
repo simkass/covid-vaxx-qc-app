@@ -8,9 +8,6 @@ import { User } from './user.model'
 })
 export class DataService {
 
-  private ESTABLISHMENTS_API = "http://127.0.0.1:5000/establishments";
-  private USER_API = "http://127.0.0.1:5000/user";
-
   constructor(private httpClient: HttpClient) { }
 
   public getEstablishments(postalCode: string) {
@@ -25,5 +22,15 @@ export class DataService {
     const headers = { 'content-type': 'application/json' }
     const body = JSON.stringify(user);
     return this.httpClient.post(this.USER_API, body, { 'headers': headers })
+  }
+
+  public unsubscribeRequest(email: string) {
+    const headers = { 'content-type': 'application/json' }
+    return this.httpClient.post(this.UNSUB_REQUEST_API, { "email": email }, { 'headers': headers })
+  }
+
+  public unsubscribe(email: string, random_code: number) {
+    const headers = { 'content-type': 'application/json' }
+    return this.httpClient.post(this.UNSUB_API, { "email": email, "random_code": random_code }, { 'headers': headers })
   }
 }

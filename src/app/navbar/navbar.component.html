@@ -1,5 +1,5 @@
-<div>
-  <mat-toolbar color="primary">
+<div style="height: 90vh;">
+  <mat-toolbar color="primary" class=mat-elevation-z4>
     <mat-toolbar-row>
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
@@ -23,7 +23,7 @@
         <a href="#" mat-list-item>À propos</a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill>
+    <mat-sidenav-content fxFlexFill style="scroll-behavior: smooth;">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

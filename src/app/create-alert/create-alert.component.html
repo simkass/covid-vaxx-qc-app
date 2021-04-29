@@ -1,25 +1,27 @@
-<div id="create-alert" class=create-alert>
-    <div class=form-container>
-        <h1>Créer une alerte</h1>
-        <form>
-            <mat-form-field>
-                <mat-label>Code postal</mat-label>
-                <input type="string" matInput [formControl]="postalCodeFormControl" [errorStateMatcher]="matcher"
-                    placeholder="Ex. A1A 1A1" [(ngModel)]='postalCode'>
-                <mat-hint></mat-hint>
-                <mat-error
-                    *ngIf="postalCodeFormControl.hasError('pattern') && !postalCodeFormControl.hasError('required')">
-                    Veuillez entrez un code postal valide
-                </mat-error>
-                <mat-error *ngIf="postalCodeFormControl.hasError('required')">
-                    Veuillez entrez un code postal
-                </mat-error>
-            </mat-form-field>
-        </form>
-        <div style="width: 100%; text-align: right; margin-top: 10px;">
-            <button mat-flat-button color="primary" (click)="displayCreateAlertStepper()"
-                [disabled]="postalCodeFormControl.hasError('pattern') || postalCodeFormControl.hasError('required')">Débuter</button>
+<div style="min-height: 70vh;">
+    <div id="create-alert" class=create-alert>
+        <div class=form-container>
+            <h1>Créer une alerte</h1>
+            <form>
+                <mat-form-field>
+                    <mat-label>Code postal</mat-label>
+                    <input type="string" matInput [formControl]="postalCodeFormControl" [errorStateMatcher]="matcher"
+                        placeholder="Ex. A1A 1A1" [(ngModel)]='postalCode'>
+                    <mat-hint></mat-hint>
+                    <mat-error
+                        *ngIf="postalCodeFormControl.hasError('pattern') && !postalCodeFormControl.hasError('required')">
+                        Veuillez entrez un code postal valide
+                    </mat-error>
+                    <mat-error *ngIf="postalCodeFormControl.hasError('required')">
+                        Veuillez entrez un code postal
+                    </mat-error>
+                </mat-form-field>
+            </form>
+            <div style="width: 100%; text-align: right; margin-top: 10px;">
+                <button mat-flat-button color="primary" (click)="displayCreateAlertStepper()"
+                    [disabled]="postalCodeFormControl.hasError('pattern') || postalCodeFormControl.hasError('required')">Débuter</button>
+            </div>
         </div>
     </div>
+    <div #container></div>
 </div>
-<div #container></div>

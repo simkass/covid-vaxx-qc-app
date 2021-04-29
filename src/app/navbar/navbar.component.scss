@@ -5,3 +5,8 @@
 .refresh:hover{
   cursor: pointer;
 }
+
+.mat-toolbar {
+  position: relative;
+  z-index:4;
+}
