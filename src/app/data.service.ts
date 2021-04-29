@@ -8,6 +8,11 @@ import { User } from './user.model'
 })
 export class DataService {
 
+  private ESTABLISHMENTS_API = "http://127.0.0.1:5000/establishments";
+  private USER_API = "http://127.0.0.1:5000/user";
+  private UNSUB_REQUEST_API = "http://127.0.0.1:5000/unsubscribe-request";
+  private UNSUB_API = "http://127.0.0.1:5000/unsubscribe";
+
   constructor(private httpClient: HttpClient) { }
 
   public getEstablishments(postalCode: string) {
