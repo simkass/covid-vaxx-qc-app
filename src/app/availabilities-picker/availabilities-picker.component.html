@@ -6,7 +6,14 @@
                     <a class=input-label>DÉBUT</a>
                 </div>
                 <mat-form-field>
-                    <input matInput type="datetime-local" [(ngModel)]='startDatetime'>
+                    <input matInput type="datetime-local" [(ngModel)]='startDatetime' [min]='today' [max]='endDatetime'
+                        [formControl]="startDateForm">
+                    <mat-error *ngIf="startDateForm.hasError('invalidDate')">
+                        Veuillez fournir un moment moins récent que la disponibilité de FIN
+                    </mat-error>
+                    <mat-error *ngIf="startDateForm.hasError('beforeToday')">
+                        Veuillez fournir un moment plus récent que le moment actuel
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class=date-input>
@@ -14,7 +21,11 @@
                     <a class=input-label>FIN</a>
                 </div>
                 <mat-form-field>
-                    <input matInput type="datetime-local" [(ngModel)]='endDatetime'>
+                    <input matInput type="datetime-local" [(ngModel)]='endDatetime' [min]='startDatetime'
+                        [formControl]="endDateForm">
+                    <mat-error *ngIf="endDateForm.hasError('invalidDate')">
+                        Veuillez fournir un moment plus récent que la disponibilité de DÉBUT
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
