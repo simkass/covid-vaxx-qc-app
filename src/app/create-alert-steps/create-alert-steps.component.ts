@@ -6,6 +6,7 @@ import { DataService } from '../data.service';
 import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabilities-picker.component'
 import { User } from '../user.model'
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -127,6 +128,7 @@ export class CreateAlertStepsComponent implements OnInit {
       datePickerComponent.parentRef = this;
 
       this.datepickerRefs.push(componentRef)
+      this.rebuildSecondFormGroup()
     }
   }
 
@@ -143,10 +145,30 @@ export class CreateAlertStepsComponent implements OnInit {
     this.datepickerRefs = this.datepickerRefs.filter(
       x => x.instance.id !== key
     );
+    this.rebuildSecondFormGroup()
+  }
+
+  rebuildSecondFormGroup() {
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['']
+    });
+
+    for (let i = 0; i < this.datepickerRefs.length; i++){
+      this.secondFormGroup.addControl("s" + i, this.datepickerRefs[i].instance.startDateForm);
+      this.secondFormGroup.addControl("e" + i, this.datepickerRefs[i].instance.endDateForm);
+    }
   }
 
   setAlwaysFree() {
     this.alwaysFree = !this.alwaysFree
+    if (this.alwaysFree){
+      this.secondFormGroup = this._formBuilder.group({
+        secondCtrl: ['']
+      });
+    }
+    else {
+      this.rebuildSecondFormGroup()
+    }
   }
 
   submitForm() {
