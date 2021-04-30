@@ -39,7 +39,7 @@ export class AvailabilitiesPickerComponent implements OnInit {
 
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
-        return null;
+        return { noDate: 'Veuillez fournir une disponibilité' };
       }
 
       // return null if there's no errors
@@ -60,7 +60,7 @@ export class AvailabilitiesPickerComponent implements OnInit {
 
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
-        return null;
+        return { noDate: 'Veuillez fournir une disponibilité' };
       }
 
       // return null if there's no errors

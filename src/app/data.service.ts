@@ -8,10 +8,11 @@ import { User } from './user.model'
 })
 export class DataService {
 
-  private ESTABLISHMENTS_API = "http://127.0.0.1:5000/establishments";
-  private USER_API = "http://127.0.0.1:5000/user";
-  private UNSUB_REQUEST_API = "http://127.0.0.1:5000/unsubscribe-request";
-  private UNSUB_API = "http://127.0.0.1:5000/unsubscribe";
+  private API = "http://127.0.0.1:5000/"
+  private ESTABLISHMENTS_API = this.API + "establishments";
+  private USER_API = this.API + "user";
+  private UNSUB_REQUEST_API = this.API + "unsubscribe-request";
+  private UNSUB_API = this.API + "unsubscribe";
 
   constructor(private httpClient: HttpClient) { }
 
