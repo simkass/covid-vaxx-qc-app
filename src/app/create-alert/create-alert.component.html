@@ -18,8 +18,8 @@
                 </mat-form-field>
             </form>
             <div style="width: 100%; text-align: right; margin-top: 10px;">
-                <button mat-flat-button color="primary" (click)="displayCreateAlertStepper()"
-                    [disabled]="postalCodeFormControl.hasError('pattern') || postalCodeFormControl.hasError('required')">Débuter</button>
+                <a href="#create-alert-stepper"><button mat-flat-button color="primary" (click)="displayCreateAlertStepper()"
+                        [disabled]="postalCodeFormControl.hasError('pattern') || postalCodeFormControl.hasError('required')">Débuter</button></a>
             </div>
         </div>
     </div>

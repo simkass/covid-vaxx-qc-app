@@ -46,7 +46,7 @@ export class CreateAlertStepsComponent implements OnInit {
   public emailAddress: string;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
-    private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private _vps: ViewportScroller) { }
+    private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -84,7 +84,7 @@ export class CreateAlertStepsComponent implements OnInit {
         // Store reference to component
         this.establishmentRefs.push(componentRef)
       }
-      
+
 
     }, (err: any) => {
       if (this.establishmentRefs.length == 0) {
@@ -97,8 +97,7 @@ export class CreateAlertStepsComponent implements OnInit {
         this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
       }
     })
-    
-    this._vps.scrollToAnchor('create-alert-stepper')
+
     this.addAvailabilitiesPicker();
     this.cd.detectChanges();
   }
