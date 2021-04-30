@@ -153,7 +153,7 @@ export class CreateAlertStepsComponent implements OnInit {
       secondCtrl: ['']
     });
 
-    for (let i = 0; i < this.datepickerRefs.length; i++){
+    for (let i = 0; i < this.datepickerRefs.length; i++) {
       this.secondFormGroup.addControl("s" + i, this.datepickerRefs[i].instance.startDateForm);
       this.secondFormGroup.addControl("e" + i, this.datepickerRefs[i].instance.endDateForm);
     }
@@ -161,7 +161,7 @@ export class CreateAlertStepsComponent implements OnInit {
 
   setAlwaysFree() {
     this.alwaysFree = !this.alwaysFree
-    if (this.alwaysFree){
+    if (this.alwaysFree) {
       this.secondFormGroup = this._formBuilder.group({
         secondCtrl: ['']
       });
@@ -185,23 +185,26 @@ export class CreateAlertStepsComponent implements OnInit {
       }
     }
 
-    // Identify specified availabilities
-    for (let i = 0; i < this.datepickerRefs.length; i++) {
-      if (this.datepickerRefs[i].instance.hasOwnProperty("startDatetime") &&
-        this.datepickerRefs[i].instance.hasOwnProperty("endDatetime")) {
-        this.availabilities.push({
-          "start": this.datepickerRefs[i].instance.startDatetime,
-          "stop": this.datepickerRefs[i].instance.endDatetime
-        })
-      }
-    }
-
-    // If always free or no availabilities
-    if (this.alwaysFree || this.availabilities.length == 0) {
-      this.availabilities.push({
+    // If always free
+    if (this.alwaysFree) {
+      this.availabilities = [{
         "start": "2021-01-01T09:00",
         "stop": "2022-12-31T09:00"
-      })
+      }]
+    }
+    else {
+      // Identify specified availabilities
+      for (let i = 0; i < this.datepickerRefs.length; i++) {
+        if (this.datepickerRefs[i].instance.hasOwnProperty("startDatetime") &&
+          this.datepickerRefs[i].instance.hasOwnProperty("endDatetime")) {
+          if (this.datepickerRefs[i].instance.startDatetime != undefined && this.datepickerRefs[i].instance.endDatetime != undefined) {
+            this.availabilities.push({
+              "start": this.datepickerRefs[i].instance.startDatetime,
+              "stop": this.datepickerRefs[i].instance.endDatetime
+            })
+          }
+        }
+      }
     }
 
     // Create user and post

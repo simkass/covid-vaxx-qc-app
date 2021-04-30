@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CreateAlertStepsComponent } from '../create-alert-steps/create-alert-steps.component'
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-availabilities-picker',
