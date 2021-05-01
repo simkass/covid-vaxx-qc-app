@@ -1,0 +1,36 @@
+h1 {
+    margin-bottom: 30px;
+}
+
+form {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.create-alert {
+    width: 100%;
+    margin-bottom: 40px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.form-container {
+    width: 30%;
+    margin-top: 50px;
+    align-items: right;
+}
+
+@media all and (max-width: 1200px) {
+    .form-container {
+        width: 50%;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .form-container {
+        width: 80%;
+    }
+}

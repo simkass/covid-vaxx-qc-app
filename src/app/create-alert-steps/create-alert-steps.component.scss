@@ -1,0 +1,91 @@
+.create-alert-stepper {
+    min-height: 50vh;
+}
+
+mat-horizontal-stepper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.title {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-label {
+    height: 35px;
+    min-width: 250px;
+    display: inline-flex;
+}
+
+.title-buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.title-buttons button {
+    max-height: 40px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cards-container {
+    height: 800px;
+    width: 100%;
+    justify-content: center;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.always-free {
+    font-size: 16px;
+}
+
+.add-button {
+    width: 100%;
+    margin-top: 20px;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.email-field {
+    width: 400px;
+    max-width: 90%;
+}
+
+.third-buttons {
+    width: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.third-buttons button {
+    margin-left: 40px;
+}
+
+@media all and (max-width: 1200px) {
+    mat-horizontal-stepper {
+        width: 95%;
+    }
+}
+
+@media all and (max-width: 900px) {
+    .title-buttons {
+        height: 70px;
+        width: 100%;
+    }
+    .title-label {
+        height: 70px;
+    }
+}

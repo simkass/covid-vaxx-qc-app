@@ -1,0 +1,30 @@
+.unsubscribe {
+    height: 70vh;
+    width: 100%;
+}
+
+.unsubscribe-form {
+    width: 400px;
+    max-width: 90vh;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.buttons {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.confirm-unsubscribe {
+    width: 400px;
+    max-width: 90vh;
+    margin: 0 auto;
+    margin-top: 60px;
+}

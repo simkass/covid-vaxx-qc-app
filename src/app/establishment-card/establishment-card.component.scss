@@ -1,0 +1,37 @@
+@import "~@angular/material/theming";
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+mat-card {
+    width: 95%;
+}
+
+mat-card:hover {
+    @include mat-elevation(8);
+    cursor: pointer;
+}
+
+mat-card-title {
+    font-size: max(min(2vw, 25px), 16px);
+    line-height: max(min(2.1vw, 30px), 20px);
+}
+
+mat-card-subtitle {
+    margin-bottom: 0px;
+}
+
+.not-selected {
+    background-color: #ececec;
+}
+
+.selected {
+    color: white;
+    background-color: #3f51b5;
+}
+
+.selected mat-card-subtitle {
+    color: white;
+}

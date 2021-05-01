@@ -1,0 +1,45 @@
+.banner {
+    width: 100%;
+    color: white;
+    background-color: #3f51b5;
+}
+
+.banner_shadow {
+    height: 10px;
+    width: 100%;
+}
+
+.title{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.steps {
+    width: 80%;
+    flex-wrap: wrap;
+    display: inline-flex;
+    justify-content: space-evenly;
+}
+
+.step {
+    width: 300px;
+    margin-top: 35px;
+    margin-right: 50px;
+    margin-left: 50px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    
+}
+
+mat-icon {
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+}
+
+a {
+    text-decoration: none;
+}

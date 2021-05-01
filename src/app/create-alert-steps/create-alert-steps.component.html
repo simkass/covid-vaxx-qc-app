@@ -1,0 +1,107 @@
+<div class=create-alert-stepper>
+    <mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" (selectionChange)="selectionChange($event)"
+        #stepper>
+
+        <mat-step [stepControl]="firstFormGroup" [editable]="editable">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Établissements</ng-template>
+
+                <div class=title>
+                    <div class=title-label>
+                        <h1>Choisir vos centres de vaccination</h1>
+                    </div>
+                    <div class=title-buttons>
+                        <button mat-flat-button color="primary" (click)="selectAll()">{{ selectAllLabel }}</button>
+                        <button mat-flat-button color="primary" [disabled]="establishmentRefs.length == 0"
+                            matStepperNext>Prochaine étape</button>
+                    </div>
+                </div>
+
+                <div class=cards-container>
+                    <div #container></div>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup" label="Disponibilités" [editable]="editable">
+            <form [formGroup]="secondFormGroup">
+
+                <div class=title>
+                    <div class=title-label>
+                        <h1>Fournir vos disponibilités</h1>
+                    </div>
+                    <mat-checkbox class="always-free" (click)="setAlwaysFree()">Je suis disponible n'importe quand
+                    </mat-checkbox>
+                    <div class=title-buttons>
+                        <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
+                        <button mat-flat-button color="primary" matStepperNext>Prochaine étape</button>
+                    </div>
+                </div>
+
+                <div [hidden]="alwaysFree" style='width: 100%;'>
+                    <div #availabilitiesContainer></div>
+                </div>
+
+                <div class=add-button id=add-button>
+                    <button mat-fab color="accent" (click)="addAvailabilitiesPicker()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="thirdFormGroup" label="Email" [editable]="editable">
+            <form [formGroup]="thirdFormGroup">
+
+                <div style='width: 100%; text-align: center;'>
+                    <h1>Fournir votre adresse courriel</h1>
+                </div>
+                <div style='width: 100%; display: inline-flex; justify-content: center;'>
+                    <div class="email-field">
+                        <mat-form-field style='width: 100%;'>
+                            <mat-label>Email</mat-label>
+                            <input type="string" matInput [formControl]="emailFormControl" [(ngModel)]="emailAddress"
+                                placeholder="Ex. pat@example.com">
+                            <mat-error
+                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Veuillez fournir une adresse courriel valide
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Une adresse courriel est <strong>requise</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div style='width: 100%; display: inline-flex; justify-content: center;'>
+                    <div class=third-buttons>
+                        <re-captcha name="captcha" [formControl]="captchaFormControl"
+                            [siteKey]="recaptcha_key" (resolved)="resolved($event)"
+                            (error)="onError($event)">
+                        </re-captcha>
+                    </div>
+                </div>
+
+                <div style='width: 100%; display: inline-flex; justify-content: center;'>
+                    <div class=third-buttons>
+                        <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
+                        <button mat-flat-button color="primary"
+                            [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required') || captchaFormControl.hasError('required')"
+                            (click)="submitForm()" matStepperNext>Soumettre</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step label="Done">
+            <ng-template matStepLabel>Terminé</ng-template>
+            <h1>Votre alerte est créée.</h1>
+            <h2>Vous recevrez un courriel à l'adresse {{ emailAddress }} lorsqu'un rendez-vous qui respecte vos critères
+                est disponible.</h2>
+            <div>
+                <button mat-flat-button color="primary" (click)="refresh()">Créer une autre alerte</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
