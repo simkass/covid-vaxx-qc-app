@@ -8,7 +8,7 @@ import { User } from './user.model'
 })
 export class DataService {
 
-  private API = process.env.API_URL
+  private API = "https://covid-vaxx-qc-api.herokuapp.com/";
   private ESTABLISHMENTS_API = this.API + "establishments";
   private USER_API = this.API + "user";
   private UNSUB_REQUEST_API = this.API + "unsubscribe-request";
