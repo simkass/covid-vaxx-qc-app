@@ -31,7 +31,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AvailabilitiesPickerComponent } from './availabilities-picker/availabilities-picker.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
-import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -67,9 +67,14 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     MatToolbarModule,
 
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: "fr" // use French language
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
