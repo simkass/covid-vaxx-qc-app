@@ -52,6 +52,7 @@ export class CreateAlertStepsComponent implements OnInit {
 
   public emailAddress: string;
 
+  public recaptcha_key = process.env.RECAPTCHA_KEY;
   private recaptchaResponse: string;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,

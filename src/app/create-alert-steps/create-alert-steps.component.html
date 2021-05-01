@@ -77,7 +77,7 @@
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class=third-buttons>
                         <re-captcha name="captcha" [formControl]="captchaFormControl"
-                            siteKey="" (resolved)="resolved($event)"
+                            [siteKey]="recaptcha_key" (resolved)="resolved($event)"
                             (error)="onError($event)">
                         </re-captcha>
                     </div>
