@@ -20,16 +20,16 @@ export class CreateAlertStepsComponent implements OnInit {
   @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
   @ViewChild('availabilitiesContainer', { read: ViewContainerRef }) availabilitiesContainer: ViewContainerRef;
 
-  emailFormControl = new FormControl('', [
+  @Input() postalCode: string;
+
+  public emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
-  captchaFormControl = new FormControl('', [
+  public captchaFormControl = new FormControl('', [
     Validators.required
   ]);
-
-  @Input() postalCode: string;
 
   public isLinear: boolean = true;
   public editable: boolean = true;
@@ -44,15 +44,15 @@ export class CreateAlertStepsComponent implements OnInit {
   private datepickerRefs = [];
   private availabilities = [];
 
+  public alwaysFree: boolean = false;
   public allSelected: boolean = false;
   public selectAllLabel: string = "Sélectionner tout"
-  public alwaysFree: boolean = false;
 
   public datePickerId: number = 0;
 
   public emailAddress: string;
 
-  formModel;
+  private recaptchaResponse: string;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef) { }
@@ -222,6 +222,7 @@ export class CreateAlertStepsComponent implements OnInit {
     user.postalCode = this.postalCode
     user.establishments = this.selectedEstablishments;
     user.availabilities = this.availabilities;
+    user.recaptcha = this.recaptchaResponse;
     this.editable = false;
     this.dataService.postUser(user).subscribe(data => { });
   }
@@ -229,11 +230,12 @@ export class CreateAlertStepsComponent implements OnInit {
   selectionChange(event: StepperSelectionEvent) {
     let stepLabel = event.selectedStep.label
     if (stepLabel == "Done") {
-      //this.submitForm();
+      this.submitForm();
     }
   }
 
   public resolved(captchaResponse: string): void {
+    this.recaptchaResponse = captchaResponse;
     console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 

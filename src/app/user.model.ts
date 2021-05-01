@@ -3,4 +3,5 @@ export class User {
     postalCode: string
     establishments: number[]
     availabilities: string[]
+    recaptcha: string
 }

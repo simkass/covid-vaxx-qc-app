@@ -76,8 +76,9 @@
 
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class=third-buttons>
-                        <re-captcha [(ngModel)]="formModel" name="captcha" [formControl]="captchaFormControl"
-                            siteKey="">
+                        <re-captcha name="captcha" [formControl]="captchaFormControl"
+                            siteKey="" (resolved)="resolved($event)"
+                            (error)="onError($event)">
                         </re-captcha>
                     </div>
                 </div>
