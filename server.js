@@ -2,10 +2,10 @@ const express = require('express');
 
 const app = express();
 
-app.use(express.static('./dist/live-portfolio'));
+app.use(express.static('./dist/covid-vaxx-qc-app'));
 
 app.get('/*', function (req, res) {
-  res.sendFile('index.html', { root: 'dist/live-portfolio' }
+  res.sendFile('index.html', { root: 'dist/covid-vaxx-qc-app' }
   );
 });
 
