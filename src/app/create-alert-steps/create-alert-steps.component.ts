@@ -7,6 +7,7 @@ import { EstablishmentCardComponent } from '../establishment-card/establishment-
 import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabilities-picker.component'
 import { User } from '../user.model'
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -45,6 +46,8 @@ export class CreateAlertStepsComponent implements OnInit {
   public datePickerId: number = 0;
 
   public emailAddress: string;
+
+  formModel;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef) { }
@@ -215,6 +218,13 @@ export class CreateAlertStepsComponent implements OnInit {
     user.availabilities = this.availabilities;
     this.editable = false;
     this.dataService.postUser(user).subscribe(data => { });
+  }
+
+  selectionChange(event: StepperSelectionEvent) {
+    let stepLabel = event.selectedStep.label
+    if (stepLabel == "Done") {
+      this.submitForm();
+    }
   }
 
   refresh(): void {
