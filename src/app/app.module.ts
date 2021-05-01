@@ -31,6 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AvailabilitiesPickerComponent } from './availabilities-picker/availabilities-picker.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +65,9 @@ import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
     MatSidenavModule,
     MatStepperModule,
     MatToolbarModule,
+
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

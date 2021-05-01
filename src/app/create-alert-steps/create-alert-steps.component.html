@@ -1,5 +1,6 @@
 <div class=create-alert-stepper>
-    <mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" (selectionChange)="selectionChange($event)" #stepper>
+    <mat-horizontal-stepper [linear]="isLinear" id="create-alert-stepper" (selectionChange)="selectionChange($event)"
+        #stepper>
 
         <mat-step [stepControl]="firstFormGroup" [editable]="editable">
             <form [formGroup]="firstFormGroup">
@@ -75,9 +76,17 @@
 
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class=third-buttons>
+                        <re-captcha [(ngModel)]="formModel" name="captcha" [formControl]="captchaFormControl"
+                            siteKey="">
+                        </re-captcha>
+                    </div>
+                </div>
+
+                <div style='width: 100%; display: inline-flex; justify-content: center;'>
+                    <div class=third-buttons>
                         <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
                         <button mat-flat-button color="primary"
-                            [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')"
+                            [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required') || captchaFormControl.hasError('required')"
                             (click)="submitForm()" matStepperNext>Soumettre</button>
                     </div>
                 </div>

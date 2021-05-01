@@ -8,6 +8,7 @@ import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabi
 import { User } from '../user.model'
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { RecaptchaErrorParameters } from "ng-recaptcha";
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -22,6 +23,10 @@ export class CreateAlertStepsComponent implements OnInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
+  ]);
+
+  captchaFormControl = new FormControl('', [
+    Validators.required
   ]);
 
   @Input() postalCode: string;
@@ -62,6 +67,7 @@ export class CreateAlertStepsComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: this.emailFormControl
     });
+    this.thirdFormGroup.addControl('captcha', this.captchaFormControl);
   }
 
   ngAfterViewInit() {
@@ -223,8 +229,16 @@ export class CreateAlertStepsComponent implements OnInit {
   selectionChange(event: StepperSelectionEvent) {
     let stepLabel = event.selectedStep.label
     if (stepLabel == "Done") {
-      this.submitForm();
+      //this.submitForm();
     }
+  }
+
+  public resolved(captchaResponse: string): void {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
+  public onError(errorDetails: RecaptchaErrorParameters): void {
+    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
   }
 
   refresh(): void {
