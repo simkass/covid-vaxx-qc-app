@@ -52,8 +52,9 @@ export class CreateAlertStepsComponent implements OnInit {
 
   public emailAddress: string;
 
-  public recaptcha_key = "6LfVxMEaAAAAAFfZX7LskkzwaqhZrakbZBAofG1R"
   private recaptchaResponse: string;
+
+  public loading: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef) { }
@@ -72,6 +73,7 @@ export class CreateAlertStepsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.loading = true;
     // create the component factory
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
     // this.container.clear();
@@ -94,8 +96,8 @@ export class CreateAlertStepsComponent implements OnInit {
 
         // Store reference to component
         this.establishmentRefs.push(componentRef)
+        this.loading = false;
       }
-
 
     }, (err: any) => {
       if (this.establishmentRefs.length == 0) {
@@ -107,6 +109,7 @@ export class CreateAlertStepsComponent implements OnInit {
         this.firstFormGroup.controls.firstCtrl.setValidators(Validators.required)
         this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
       }
+      this.loading = false;
     })
 
     this.addAvailabilitiesPicker();
