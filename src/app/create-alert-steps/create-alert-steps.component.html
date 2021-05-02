@@ -57,7 +57,7 @@
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="thirdFormGroup" label="Email" [editable]="editable">
+        <mat-step [stepControl]="thirdFormGroup" label="Courriel" [editable]="editable">
             <form [formGroup]="thirdFormGroup">
 
                 <div style='width: 100%; text-align: center;'>
@@ -66,7 +66,7 @@
                 <div style='width: 100%; display: inline-flex; justify-content: center;'>
                     <div class="email-field">
                         <mat-form-field style='width: 100%;'>
-                            <mat-label>Email</mat-label>
+                            <mat-label>Courriel</mat-label>
                             <input type="string" matInput [formControl]="emailFormControl" [(ngModel)]="emailAddress"
                                 placeholder="Ex. pat@example.com">
                             <mat-error

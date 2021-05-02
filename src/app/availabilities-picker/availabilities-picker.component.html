@@ -12,10 +12,10 @@
                         Veuillez fournir une disponibilité
                     </mat-error>
                     <mat-error *ngIf="startDateForm.hasError('invalidDate')">
-                        Veuillez fournir un moment moins récent que la disponibilité de FIN
+                        Veuillez fournir un moment antérieur à la disponibilité de FIN
                     </mat-error>
                     <mat-error *ngIf="startDateForm.hasError('beforeToday')">
-                        Veuillez fournir un moment plus récent que le moment actuel
+                        Disponibilité invalide (Moment antérieur au moment présent) 
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -30,7 +30,7 @@
                         Veuillez fournir une disponibilité
                     </mat-error>
                     <mat-error *ngIf="endDateForm.hasError('invalidDate')">
-                        Veuillez fournir un moment plus récent que la disponibilité de DÉBUT
+                        Veuillez fournir un moment postérieur la disponibilité de DÉBUT
                     </mat-error>
                 </mat-form-field>
             </div>

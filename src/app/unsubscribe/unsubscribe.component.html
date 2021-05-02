@@ -2,7 +2,7 @@
     <div class=unsubscribe-form>
         <form>
             <mat-form-field>
-              <mat-label>Email</mat-label>
+              <mat-label>Courriel</mat-label>
               <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]='emailAddress'
                      placeholder="Ex. pat@example.com">
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -18,7 +18,7 @@
           </div>
     </div>
     <div class=confirm-unsubscribe [hidden]="!unsubscriptionNotNeeded">
-      <h3>Cette addresse courriel n'est pas abonnée au service Alerte Vaccin. Considérez vous comme étant désabonné.</h3>
+      <h3>Cette addresse courriel n'est pas abonnée au service Alerte Vaccin. Considérez-vous comme étant désabonné.</h3>
     </div>
     <div class=confirm-unsubscribe [hidden]="!unsubscriptionStarted">
         <p>Vous devriez recevoir un code de confirmation par courriel dans les 5 prochaines minutes. Veuillez le fournir dans la boite ci-desous pour compléter le désabonnement.</p>
@@ -43,6 +43,6 @@
       <h3>Vous avez été désabonné avec succès.</h3>
     </div>
     <div class=confirm-unsubscribe [hidden]="!unsubscriptionFailed">
-      <h3>Une erreur est survenue. Le code de confirmation fournie n'est peut-être pas bon.</h3>
+      <h3>Une erreur est survenue. Le code de confirmation fourni n'est pas valide.</h3>
     </div>
 </div>
