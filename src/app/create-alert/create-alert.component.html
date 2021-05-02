@@ -10,10 +10,10 @@
                     <mat-hint></mat-hint>
                     <mat-error
                         *ngIf="postalCodeFormControl.hasError('pattern') && !postalCodeFormControl.hasError('required')">
-                        Veuillez entrez un code postal valide
+                        Veuillez entrer un code postal valide.
                     </mat-error>
                     <mat-error *ngIf="postalCodeFormControl.hasError('required')">
-                        Veuillez entrez un code postal
+                        Veuillez entrer un code postal.
                     </mat-error>
                 </mat-form-field>
             </form>
