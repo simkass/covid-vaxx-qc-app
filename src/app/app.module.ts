@@ -33,6 +33,7 @@ import { AvailabilitiesPickerComponent } from './availabilities-picker/availabil
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_LANGUAGE } from 'ng-re
     CreateAlertStepsComponent,
     EstablishmentCardComponent,
     AvailabilitiesPickerComponent,
-    UnsubscribeComponent
+    UnsubscribeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

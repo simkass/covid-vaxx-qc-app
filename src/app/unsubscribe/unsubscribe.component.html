@@ -6,10 +6,10 @@
               <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]='emailAddress'
                      placeholder="Ex. pat@example.com">
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Veuillez fournir une adresse courriel valide
+                Veuillez fournir une adresse courriel valide.
               </mat-error>
               <mat-error *ngIf="emailFormControl.hasError('required')">
-                Une adresse courriel est <strong>requise</strong>
+                Une adresse courriel est <strong>requise</strong>.
               </mat-error>
             </mat-form-field>
           </form>
@@ -28,10 +28,10 @@
               <input type="string" matInput [formControl]="codeFormControl" [errorStateMatcher]="matcher" [(ngModel)]='randomCode'
                      placeholder="Ex. 1234">
               <mat-error *ngIf="codeFormControl.hasError('pattern') && !codeFormControl.hasError('required')">
-                Veuillez fournir un code valide
+                Veuillez fournir un code valide.
               </mat-error>
               <mat-error *ngIf="codeFormControl.hasError('required')">
-                Un code de confirmation est <strong>requis</strong>
+                Un code de confirmation est <strong>requis</strong>.
               </mat-error>
             </mat-form-field>
           </form>

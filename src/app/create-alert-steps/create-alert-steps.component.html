@@ -71,10 +71,10 @@
                                 placeholder="Ex. pat@example.com">
                             <mat-error
                                 *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Veuillez fournir une adresse courriel valide
+                                Veuillez fournir une adresse courriel valide.
                             </mat-error>
                             <mat-error *ngIf="emailFormControl.hasError('required')">
-                                Une adresse courriel est <strong>requise</strong>
+                                Une adresse courriel est <strong>requise</strong>.
                             </mat-error>
                         </mat-form-field>
                     </div>
