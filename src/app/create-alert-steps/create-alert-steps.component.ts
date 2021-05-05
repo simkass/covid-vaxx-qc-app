@@ -1,15 +1,12 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ViewportScroller } from '@angular/common'
 
 import { DataService } from '../data.service';
 import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabilities-picker.component'
 import { User } from '../user.model'
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
-import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -79,7 +76,7 @@ export class CreateAlertStepsComponent implements OnInit {
     // create the component factory
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
     // this.container.clear();
-    // this.establishmentRefs = [];
+    this.establishmentRefs = [];
     this.dataService.getEstablishments(this.postalCode, this.coordinates).subscribe((data: any[]) => {
       // Store response
       this.establishmentResponse = data;
@@ -241,9 +238,6 @@ export class CreateAlertStepsComponent implements OnInit {
       this.loading = true;
       this.submitForm();
     }
-  }
-  goToNextStep(stepper: MatStepper) {
-    stepper.next()
   }
 
   public resolved(captchaResponse: string): void {

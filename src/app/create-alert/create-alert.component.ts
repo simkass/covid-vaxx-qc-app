@@ -49,6 +49,7 @@ export class CreateAlertComponent {
   }
 
   getLocationAndCreateAlertStepper(): void {
+    this.postalCodeFormControl = new FormControl('', [])
     this.postalCode = null
     this.getCurrentLocation().then(pos => {
       this.coordinates = pos
