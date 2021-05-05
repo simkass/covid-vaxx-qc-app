@@ -9,6 +9,7 @@ import { User } from '../user.model'
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -229,14 +230,20 @@ export class CreateAlertStepsComponent implements OnInit {
     user.availabilities = this.availabilities;
     user.recaptcha = this.recaptchaResponse;
     this.editable = false;
-    this.dataService.postUser(user).subscribe(data => { });
+    this.dataService.postUser(user).subscribe(data => {
+      this.loading = false;
+    });
   }
 
   selectionChange(event: StepperSelectionEvent) {
     let stepLabel = event.selectedStep.label
     if (stepLabel == "Done") {
+      this.loading = true;
       this.submitForm();
     }
+  }
+  goToNextStep(stepper: MatStepper) {
+    stepper.next()
   }
 
   public resolved(captchaResponse: string): void {
