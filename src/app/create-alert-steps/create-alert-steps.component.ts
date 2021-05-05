@@ -21,6 +21,7 @@ export class CreateAlertStepsComponent implements OnInit {
   @ViewChild('availabilitiesContainer', { read: ViewContainerRef }) availabilitiesContainer: ViewContainerRef;
 
   @Input() postalCode: string;
+  @Input() coordinates: string;
 
   public emailFormControl = new FormControl('', [
     Validators.required,
@@ -78,10 +79,10 @@ export class CreateAlertStepsComponent implements OnInit {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
     // this.container.clear();
     // this.establishmentRefs = [];
-
-    this.dataService.getEstablishments(this.postalCode).subscribe((data: any[]) => {
+    this.dataService.getEstablishments(this.postalCode, this.coordinates).subscribe((data: any[]) => {
       // Store response
       this.establishmentResponse = data;
+      console.log(data)
 
       // Create and display cards for every establishment
       for (let i = 0; i < this.establishmentResponse.places.length; i++) {
