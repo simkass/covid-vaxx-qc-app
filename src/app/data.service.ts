@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model'
 
@@ -17,11 +17,22 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getEstablishments(postalCode: string) {
-    return this.httpClient.get(this.ESTABLISHMENTS_API, {
-      params: {
-        postal_code: postalCode,
+  public getEstablishments(postalCode?: string, coordinates?: string) {
+    let params = new HttpParams();
+
+    if (postalCode) {
+      console.log(postalCode)
+      params = params.set('postal_code', postalCode)
+    }
+    else {
+      if (coordinates) {
+        console.log(coordinates)
+        params = params.set('lat', coordinates['lat'])
+        params = params.set('lng', coordinates['lng'])
       }
+    }
+    return this.httpClient.get(this.ESTABLISHMENTS_API, {
+      params
     })
   }
 
