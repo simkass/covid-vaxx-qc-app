@@ -7,9 +7,9 @@
                     <mat-label>Code postal</mat-label>
                     <input type="string" matInput [formControl]="postalCodeFormControl" [errorStateMatcher]="matcher"
                         placeholder="Ex. A1A 1A1" [(ngModel)]='postalCode'>
-                    <a href="#create-alert-stepper" mat-icon-button matPrefix color="primary" (click)='getLocationAndCreateAlertStepper()'>
+                    <button mat-icon-button matPrefix color="primary" (click)='getLocationAndCreateAlertStepper()'>
                         <mat-icon>my_location</mat-icon>
-                    </a>
+                    </button>
                     <mat-hint></mat-hint>
                     <mat-error
                         *ngIf="postalCodeFormControl.hasError('pattern') && !postalCodeFormControl.hasError('required')">
