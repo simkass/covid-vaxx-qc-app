@@ -9,7 +9,7 @@ import { User } from './user.model'
 export class DataService {
 
   private API = "https://covid-vaxx-qc-api.herokuapp.com/";
-  // private API = "http://127.0.0.1:5000/";
+  //private API = "http://127.0.0.1:5000/";
   private ESTABLISHMENTS_API = this.API + "establishments";
   private USER_API = this.API + "user";
   private UNSUB_REQUEST_API = this.API + "unsubscribe-request";
@@ -21,12 +21,10 @@ export class DataService {
     let params = new HttpParams();
 
     if (postalCode) {
-      console.log(postalCode)
       params = params.set('postal_code', postalCode)
     }
     else {
       if (coordinates) {
-        console.log(coordinates)
         params = params.set('lat', coordinates['lat'])
         params = params.set('lng', coordinates['lng'])
       }

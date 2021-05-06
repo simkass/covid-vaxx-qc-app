@@ -106,9 +106,24 @@
                     <mat-spinner></mat-spinner>
                 </div>
             </div>
-            <div [hidden]="loading">
+            <div [hidden]="!isErrorUser">
                 <ng-template matStepLabel>Terminé</ng-template>
-                <h1>Votre alerte est créée.</h1>
+                <h1>
+                    <mat-icon [ngStyle]="{'color':'red'}">error</mat-icon>
+                    Erreur
+                </h1>
+                <h2>Le service est présentement indisponible ou il y a eu une erreur d'envoi de vos informations</h2>
+                <div>
+                    <button mat-flat-button color="primary" (click)="refresh()">Créer une autre alerte</button>
+                </div>
+            </div>
+            <div [hidden]="loading || isErrorUser">
+                <ng-template matStepLabel>
+                    Terminé
+                </ng-template>
+                <h1>
+                    <mat-icon [ngStyle]="{'color':'green'}">check</mat-icon>Votre alerte est créée.
+                </h1>
                 <h2>Vous recevrez un courriel à l'adresse {{ emailAddress }} lorsqu'un rendez-vous qui respecte vos
                     critères
                     est disponible.</h2>

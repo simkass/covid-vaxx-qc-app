@@ -8,11 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EstablishmentCardComponent implements OnInit {
 
   @Input()
-  id: string;
-  @Input()
-  name: string;
-  @Input()
-  address: string;
+  establishment: any;
   @Input()
   selectable: boolean;
 
@@ -24,7 +20,7 @@ export class EstablishmentCardComponent implements OnInit {
   }
 
   public onCardClick(evt: MouseEvent) {
-    if (this.selectable){
+    if (this.selectable) {
       this.selected = !this.selected;
     }
   }
