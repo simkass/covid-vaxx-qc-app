@@ -55,6 +55,7 @@ export class CreateAlertStepsComponent implements OnInit {
   private recaptchaResponse: string;
 
   public loading: boolean = false;
+  public isErrorUser: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private route: ActivatedRoute) { }
@@ -85,7 +86,6 @@ export class CreateAlertStepsComponent implements OnInit {
     this.dataService.getEstablishments(this.postalCode, this.coordinates).subscribe((data: any[]) => {
       // Store response
       this.establishmentResponse = data;
-      console.log(data)
 
       // Create and display cards for every establishment
       for (let i = 0; i < this.establishmentResponse.places.length; i++) {
@@ -93,11 +93,8 @@ export class CreateAlertStepsComponent implements OnInit {
         const componentRef = this.container.createComponent(componentFactory);
 
         // Set component parameters
-        componentRef.instance.id = this.establishmentResponse.places[i].id;
-        componentRef.instance.name = this.establishmentResponse.places[i].name_fr;
-        componentRef.instance.address = this.establishmentResponse.places[i].formatted_address;
+        componentRef.instance.establishment = this.establishmentResponse.places[i];
         componentRef.instance.selectable = true;
-
         // Store reference to component
         this.establishmentRefs.push(componentRef)
         this.loading = false;
@@ -106,9 +103,12 @@ export class CreateAlertStepsComponent implements OnInit {
     }, (err: any) => {
       if (this.establishmentRefs.length == 0) {
         const componentRef = this.container.createComponent(componentFactory);
-        componentRef.instance.id = '500';
-        componentRef.instance.name = "Ce code postal n'existe pas ou est invalide";
-        componentRef.instance.address = "Veuillez entrer un code postal valide";
+        componentRef.instance.establishment = {
+          id: 500,
+          name_fr: "Ce code postal n'existe pas ou est invalide",
+          formatted_address: "Veuillez entrer un code postal valide"
+        };
+
         componentRef.instance.selectable = false;
         this.firstFormGroup.controls.firstCtrl.setValidators(Validators.required)
         this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
@@ -192,13 +192,13 @@ export class CreateAlertStepsComponent implements OnInit {
     // Identify selected establishments
     for (let i = 0; i < this.establishmentRefs.length; i++) {
       if (this.establishmentRefs[i].instance.selected) {
-        this.selectedEstablishments.push(this.establishmentRefs[i].instance.id)
+        this.selectedEstablishments.push(this.establishmentRefs[i].instance.establishment)
       }
     }
     // If no establishment is selected, select all
     if (this.selectedEstablishments.length == 0) {
       for (let i = 0; i < this.establishmentRefs.length; i++) {
-        this.selectedEstablishments.push(this.establishmentRefs[i].instance.id)
+        this.selectedEstablishments.push(this.establishmentRefs[i].instance.establishment)
       }
     }
 
@@ -227,12 +227,15 @@ export class CreateAlertStepsComponent implements OnInit {
     // Create user and post
     const user = new User();
     user.email = this.emailAddress;
-    user.postalCode = this.postalCode
+    // user.postalCode = this.postalCode
     user.establishments = this.selectedEstablishments;
     user.availabilities = this.availabilities;
     user.recaptcha = this.recaptchaResponse;
     this.editable = false;
     this.dataService.postUser(user).subscribe(data => {
+      this.loading = false;
+    }, (err: any) => {
+      this.isErrorUser = true;
       this.loading = false;
     });
   }
