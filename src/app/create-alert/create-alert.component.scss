@@ -34,3 +34,11 @@ mat-form-field {
         width: 80%;
     }
 }
+
+::ng-deep .error-snackbar {
+    color:white;
+    background: #F44336 !important;
+    a, button{
+        color:white;
+    }
+  }

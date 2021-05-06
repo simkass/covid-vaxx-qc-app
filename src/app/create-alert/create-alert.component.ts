@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher } from '@angular/material/core';
 
 import { CreateAlertStepsComponent } from '../create-alert-steps/create-alert-steps.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -31,7 +32,7 @@ export class CreateAlertComponent {
   public postalCode: string;
   public coordinates: any;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private _snackBar: MatSnackBar) { }
 
   displayCreateAlertStepper(): void {
     // Clear creation form
@@ -56,6 +57,7 @@ export class CreateAlertComponent {
       this.displayCreateAlertStepper()
     }, err => {
       console.log(err)
+      this._snackBar.open("Impossible d'obtenir la géolocalisation", "OK", { duration: 2000, panelClass: ['error-snackbar'] });
     });
   }
 

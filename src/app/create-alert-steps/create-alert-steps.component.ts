@@ -56,7 +56,6 @@ export class CreateAlertStepsComponent implements OnInit {
 
   public loading: boolean = false;
   public isErrorUser: boolean = false;
-
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private route: ActivatedRoute) { }
 

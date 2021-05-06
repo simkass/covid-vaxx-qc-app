@@ -22,6 +22,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { BannerComponent } from './banner/banner.component';
 import { CreateAlertComponent } from './create-alert/create-alert.component';
@@ -69,6 +70,7 @@ import { AboutComponent } from './about/about.component';
     MatSidenavModule,
     MatStepperModule,
     MatToolbarModule,
+    MatSnackBarModule,
 
     RecaptchaModule,
     RecaptchaFormsModule,
