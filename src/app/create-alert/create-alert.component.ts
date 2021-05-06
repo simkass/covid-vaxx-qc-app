@@ -57,7 +57,6 @@ export class CreateAlertComponent {
     }, err => {
       console.log(err)
     });
-
   }
 
   getCurrentLocation(): Promise<any> {

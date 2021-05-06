@@ -7,6 +7,7 @@ import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabi
 import { User } from '../user.model'
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-alert-steps',
@@ -56,7 +57,7 @@ export class CreateAlertStepsComponent implements OnInit {
   public loading: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
-    private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef) { }
+    private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -69,6 +70,10 @@ export class CreateAlertStepsComponent implements OnInit {
       thirdCtrl: this.emailFormControl
     });
     this.thirdFormGroup.addControl('captcha', this.captchaFormControl);
+    this.route.fragment.subscribe(f => {
+      const element = document.querySelector("#" + "create-alert-stepper")
+      if (element) element.scrollIntoView()
+    })
   }
 
   ngAfterViewInit() {
