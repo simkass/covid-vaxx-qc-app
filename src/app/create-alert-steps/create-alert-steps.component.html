@@ -94,19 +94,27 @@
                         <button mat-flat-button color="primary" matStepperPrevious>Précédent</button>
                         <button mat-flat-button color="primary"
                             [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required') || captchaFormControl.hasError('required')"
-                            (click)="submitForm()" matStepperNext>Soumettre</button>
+                            matStepperNext>Soumettre</button>
                     </div>
                 </div>
 
             </form>
         </mat-step>
         <mat-step label="Done">
-            <ng-template matStepLabel>Terminé</ng-template>
-            <h1>Votre alerte est créée.</h1>
-            <h2>Vous recevrez un courriel à l'adresse {{ emailAddress }} lorsqu'un rendez-vous qui respecte vos critères
-                est disponible.</h2>
-            <div>
-                <button mat-flat-button color="primary" (click)="refresh()">Créer une autre alerte</button>
+            <div style="width: 100%; display: inline-flex; justify-content: center;">
+                <div [hidden]="!loading">
+                    <mat-spinner></mat-spinner>
+                </div>
+            </div>
+            <div [hidden]="loading">
+                <ng-template matStepLabel>Terminé</ng-template>
+                <h1>Votre alerte est créée.</h1>
+                <h2>Vous recevrez un courriel à l'adresse {{ emailAddress }} lorsqu'un rendez-vous qui respecte vos
+                    critères
+                    est disponible.</h2>
+                <div>
+                    <button mat-flat-button color="primary" (click)="refresh()">Créer une autre alerte</button>
+                </div>
             </div>
         </mat-step>
     </mat-horizontal-stepper>

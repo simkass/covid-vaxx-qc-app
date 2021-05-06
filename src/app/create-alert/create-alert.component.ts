@@ -29,6 +29,7 @@ export class CreateAlertComponent {
   matcher = new MyErrorStateMatcher();
 
   public postalCode: string;
+  public coordinates: any;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
@@ -44,5 +45,30 @@ export class CreateAlertComponent {
 
     // pass postal code to the component
     componentRef.instance.postalCode = this.postalCode
+    componentRef.instance.coordinates = this.coordinates
+  }
+
+  getLocationAndCreateAlertStepper(): void {
+    this.postalCodeFormControl = new FormControl('', [])
+    this.postalCode = null
+    this.getCurrentLocation().then(pos => {
+      this.coordinates = pos
+      this.displayCreateAlertStepper()
+    }, err => {
+      console.log(err)
+    });
+
+  }
+
+  getCurrentLocation(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(res => {
+        resolve({ lng: res.coords.longitude, lat: res.coords.latitude })
+      },
+        err => {
+          reject(err)
+        })
+    }
+    )
   }
 }

@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ViewportScroller } from '@angular/common'
 
 import { DataService } from '../data.service';
 import { EstablishmentCardComponent } from '../establishment-card/establishment-card.component';
 import { AvailabilitiesPickerComponent } from '../availabilities-picker/availabilities-picker.component'
 import { User } from '../user.model'
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
 
@@ -21,6 +19,7 @@ export class CreateAlertStepsComponent implements OnInit {
   @ViewChild('availabilitiesContainer', { read: ViewContainerRef }) availabilitiesContainer: ViewContainerRef;
 
   @Input() postalCode: string;
+  @Input() coordinates: string;
 
   public emailFormControl = new FormControl('', [
     Validators.required,
@@ -77,11 +76,11 @@ export class CreateAlertStepsComponent implements OnInit {
     // create the component factory
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
     // this.container.clear();
-    // this.establishmentRefs = [];
-
-    this.dataService.getEstablishments(this.postalCode).subscribe((data: any[]) => {
+    this.establishmentRefs = [];
+    this.dataService.getEstablishments(this.postalCode, this.coordinates).subscribe((data: any[]) => {
       // Store response
       this.establishmentResponse = data;
+      console.log(data)
 
       // Create and display cards for every establishment
       for (let i = 0; i < this.establishmentResponse.places.length; i++) {
@@ -228,12 +227,15 @@ export class CreateAlertStepsComponent implements OnInit {
     user.availabilities = this.availabilities;
     user.recaptcha = this.recaptchaResponse;
     this.editable = false;
-    this.dataService.postUser(user).subscribe(data => { });
+    this.dataService.postUser(user).subscribe(data => {
+      this.loading = false;
+    });
   }
 
   selectionChange(event: StepperSelectionEvent) {
     let stepLabel = event.selectedStep.label
     if (stepLabel == "Done") {
+      this.loading = true;
       this.submitForm();
     }
   }
