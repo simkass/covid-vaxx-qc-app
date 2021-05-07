@@ -27,6 +27,7 @@ export class CreateAlertComponent {
     Validators.pattern('[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz] ?[0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz][0-9] ?'),
   ]);
 
+
   matcher = new MyErrorStateMatcher();
 
   public postalCode: string;
@@ -50,7 +51,9 @@ export class CreateAlertComponent {
   }
 
   getLocationAndCreateAlertStepper(): void {
-    this.postalCodeFormControl = new FormControl('', [])
+    this.postalCodeFormControl = new FormControl('', [
+      Validators.pattern('[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz] ?[0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz][0-9] ?'),
+    ]);
     this.postalCode = null
     this.getCurrentLocation().then(pos => {
       this.coordinates = pos
