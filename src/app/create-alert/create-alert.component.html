@@ -8,7 +8,7 @@
                     <input type="string" matInput [formControl]="postalCodeFormControl" [errorStateMatcher]="matcher"
                         placeholder="Ex. A1A 1A1" [(ngModel)]='postalCode'>
                     <button mat-icon-button matPrefix color="primary" (click)='getLocationAndCreateAlertStepper()'>
-                        <mat-icon>my_location</mat-icon>
+                        <mat-icon [ngStyle]="{'font-size':'20px'}">my_location</mat-icon>
                     </button>
                     <mat-hint></mat-hint>
                     <mat-error

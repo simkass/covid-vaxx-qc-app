@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher } from '@angular/material/core';
 
 import { CreateAlertStepsComponent } from '../create-alert-steps/create-alert-steps.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,12 +27,13 @@ export class CreateAlertComponent {
     Validators.pattern('[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz] ?[0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz][0-9] ?'),
   ]);
 
+
   matcher = new MyErrorStateMatcher();
 
   public postalCode: string;
   public coordinates: any;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private _snackBar: MatSnackBar) { }
 
   displayCreateAlertStepper(): void {
     // Clear creation form
@@ -49,13 +51,16 @@ export class CreateAlertComponent {
   }
 
   getLocationAndCreateAlertStepper(): void {
-    this.postalCodeFormControl = new FormControl('', [])
+    this.postalCodeFormControl = new FormControl('', [
+      Validators.pattern('[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz] ?[0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz][0-9] ?'),
+    ]);
     this.postalCode = null
     this.getCurrentLocation().then(pos => {
       this.coordinates = pos
       this.displayCreateAlertStepper()
     }, err => {
       console.log(err)
+      this._snackBar.open("Impossible d'obtenir la géolocalisation", "OK", { duration: 2000, panelClass: ['error-snackbar'] });
     });
   }
 

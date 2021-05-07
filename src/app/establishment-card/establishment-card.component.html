@@ -1,7 +1,11 @@
 <div class=card>
     <mat-card [ngClass]="selected ? 'selected' : 'not-selected'" (click)="onCardClick($event)" matRipple>
         <div>
-            <mat-card-title>{{ this.establishment['name_fr'] }}</mat-card-title>
+            <mat-card-title>{{ this.establishment['name_fr'] }}
+                <div [hidden]="this.distance == ''">
+                    (&sim;{{this.distance }})
+                </div>
+            </mat-card-title>
             <mat-card-subtitle>{{ this.establishment['formatted_address'] }}</mat-card-subtitle>
         </div>
     </mat-card>

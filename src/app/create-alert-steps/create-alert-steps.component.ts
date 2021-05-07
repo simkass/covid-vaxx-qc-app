@@ -20,7 +20,7 @@ export class CreateAlertStepsComponent implements OnInit {
   @ViewChild('availabilitiesContainer', { read: ViewContainerRef }) availabilitiesContainer: ViewContainerRef;
 
   @Input() postalCode: string;
-  @Input() coordinates: string;
+  @Input() coordinates: any;
 
   public emailFormControl = new FormControl('', [
     Validators.required,
@@ -56,7 +56,6 @@ export class CreateAlertStepsComponent implements OnInit {
 
   public loading: boolean = false;
   public isErrorUser: boolean = false;
-
   constructor(private _formBuilder: FormBuilder, private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver, private cd: ChangeDetectorRef, private route: ActivatedRoute) { }
 
@@ -95,6 +94,7 @@ export class CreateAlertStepsComponent implements OnInit {
         // Set component parameters
         componentRef.instance.establishment = this.establishmentResponse.places[i];
         componentRef.instance.selectable = true;
+        componentRef.instance.coordinates = this.coordinates
         // Store reference to component
         this.establishmentRefs.push(componentRef)
         this.loading = false;
