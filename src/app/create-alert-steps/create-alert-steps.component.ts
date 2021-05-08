@@ -94,30 +94,38 @@ export class CreateAlertStepsComponent implements OnInit {
         // Set component parameters
         componentRef.instance.establishment = this.establishmentResponse.places[i];
         componentRef.instance.selectable = true;
-        componentRef.instance.coordinates = this.coordinates
+        componentRef.instance.distance = this.establishmentResponse.distanceByPlaces[this.establishmentResponse.places[i]['id']]
         // Store reference to component
         this.establishmentRefs.push(componentRef)
         this.loading = false;
       }
+      if (this.establishmentRefs.length == 0) {
+        this.createEmptyCard();
+      }
 
     }, (err: any) => {
       if (this.establishmentRefs.length == 0) {
-        const componentRef = this.container.createComponent(componentFactory);
-        componentRef.instance.establishment = {
-          id: 500,
-          name_fr: "Ce code postal n'existe pas ou est invalide",
-          formatted_address: "Veuillez entrer un code postal valide"
-        };
-
-        componentRef.instance.selectable = false;
-        this.firstFormGroup.controls.firstCtrl.setValidators(Validators.required)
-        this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
+        this.createEmptyCard();
       }
-      this.loading = false;
     })
 
     this.addAvailabilitiesPicker();
     this.cd.detectChanges();
+  }
+
+  private createEmptyCard() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(EstablishmentCardComponent);
+    const componentRef = this.container.createComponent(componentFactory);
+    componentRef.instance.establishment = {
+      id: 500,
+      name_fr: "Aucune clinique de vaccination trouvée près de chez vous",
+      formatted_address: "Veuillez entrer un autre code postal"
+    };
+
+    componentRef.instance.selectable = false;
+    this.firstFormGroup.controls.firstCtrl.setValidators(Validators.required);
+    this.firstFormGroup.controls.firstCtrl.updateValueAndValidity();
+    this.loading = false;
   }
 
   selectAll() {

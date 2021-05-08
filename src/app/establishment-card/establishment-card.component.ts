@@ -1,4 +1,3 @@
-/// <reference types="@types/googlemaps" />
 import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-establishment-card',
@@ -10,37 +9,25 @@ export class EstablishmentCardComponent implements OnInit {
   @Input()
   establishment: any;
   @Input()
-  coordinates?: any;
-  @Input()
   selectable: boolean;
+  @Input()
+  distance: number;
 
   public selected: boolean = false;
-  public distance: string;
+  public distance_str: string
 
   constructor() { }
 
   ngOnInit(): void {
-    const distance = this.getDistanceFromUser();
-    if (distance == null)
-      this.distance = ""
+    if (this.distance == null)
+      this.distance_str = ""
     else
-      this.distance = distance.toLocaleString('fr-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " km";
+      this.distance_str = this.distance + " km";
   }
 
   public onCardClick(evt: MouseEvent) {
     if (this.selectable) {
       this.selected = !this.selected;
-    }
-  }
-
-  getDistanceFromUser(): number {
-    if (this.coordinates != undefined) {
-      const userLoc = new google.maps.LatLng(this.coordinates['lat'], this.coordinates['lng']);
-      const establishmentLoc = new google.maps.LatLng(this.establishment.latitude, this.establishment.longitude);
-      return google.maps.geometry.spherical.computeDistanceBetween(userLoc, establishmentLoc) / 1000.0;
-    }
-    else {
-      return null
     }
   }
 }
