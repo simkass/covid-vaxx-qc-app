@@ -8,8 +8,8 @@ import { User } from './user.model'
 })
 export class DataService {
 
-  private API = "https://covid-vaxx-qc-api.herokuapp.com/";
-  //private API = "http://127.0.0.1:5000/";
+  //private API = "https://covid-vaxx-qc-api.herokuapp.com/";
+  private API = "http://127.0.0.1:5000/";
   private ESTABLISHMENTS_API = this.API + "establishments";
   private USER_API = this.API + "user";
   private UNSUB_REQUEST_API = this.API + "unsubscribe-request";
