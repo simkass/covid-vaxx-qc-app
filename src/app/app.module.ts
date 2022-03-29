@@ -35,6 +35,7 @@ import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { AboutComponent } from './about/about.component';
+import { OfflineComponent } from './offline/offline.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AboutComponent } from './about/about.component';
     EstablishmentCardComponent,
     AvailabilitiesPickerComponent,
     UnsubscribeComponent,
-    AboutComponent
+    AboutComponent,
+    OfflineComponent
   ],
   imports: [
     BrowserModule,
