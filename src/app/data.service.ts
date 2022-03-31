@@ -9,7 +9,7 @@ import { User } from './user.model'
 export class DataService {
 
   private API = "https://covid-vaxx-qc-api.herokuapp.com/";
-  //private API = "http://127.0.0.1:5000/";
+  // private API = "http://127.0.0.1:5000/";
   private ESTABLISHMENTS_API = this.API + "establishments";
   private USER_API = this.API + "user";
   private UNSUB_REQUEST_API = this.API + "unsubscribe-request";
@@ -17,6 +17,7 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // This is the only endpoint left.
   public getEstablishments(postalCode?: string, coordinates?: string) {
     let params = new HttpParams();
 
@@ -37,16 +38,22 @@ export class DataService {
   public postUser(user: User): Observable<any> {
     const headers = { 'content-type': 'application/json' }
     const body = JSON.stringify(user);
-    return this.httpClient.post(this.USER_API, body, { 'headers': headers })
+    return this.httpClient.get('')
+    // SERVICE IS NOW DISABLED
+    // return this.httpClient.post(this.USER_API, body, { 'headers': headers })
   }
 
   public unsubscribeRequest(email: string) {
     const headers = { 'content-type': 'application/json' }
-    return this.httpClient.post(this.UNSUB_REQUEST_API, { "email": email }, { 'headers': headers })
+    return this.httpClient.get('')
+    // SERVICE IS NOW DISABLED
+    // return this.httpClient.post(this.UNSUB_REQUEST_API, { "email": email }, { 'headers': headers })
   }
 
   public unsubscribe(email: string, random_code: number) {
     const headers = { 'content-type': 'application/json' }
-    return this.httpClient.post(this.UNSUB_API, { "email": email, "random_code": random_code }, { 'headers': headers })
+    return this.httpClient.get('')
+    // SERVICE IS NOW DISABLED
+    // return this.httpClient.post(this.UNSUB_API, { "email": email, "random_code": random_code }, { 'headers': headers })
   }
 }
