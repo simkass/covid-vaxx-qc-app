@@ -1,4 +1,7 @@
 # covid-vaxx-qc-app
+Web App allowing users to sign up for an email notification service for covid vaccine appointment availabilities
+
+Repo for the backend api is found here: https://github.com/simkass/covid-vaxx-qc-api
 
 # Set up steps
 
