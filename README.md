@@ -13,3 +13,8 @@ PLEASE DO NOT USE THE PRODUCTION API TO TEST YOUR CHANGES
 5. In src/app/create-alert-steps/create-alert-steps.component.html, change the site key of the recaptcha (should be line 86) to the site key you generated when setting up the api
 6. In the terminal, at the root of the project: npm install, ng serve
 7. Visit the website on localhost:4200
+
+# Build
+ng build --output-path docs --base-href ./
+# Deploy
+Push and commit to gh-page branch after building.
